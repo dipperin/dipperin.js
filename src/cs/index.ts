@@ -63,7 +63,7 @@ class CS extends Core {
   sendSignedTransaction: (
     hash: string,
     cb?: Callback
-  ) => Promise<string> = this.buildCall({
+  ) => Promise<string | { error: { massage: string } }> = this.buildCall({
     call: 'chainstack_newTransaction',
     inputFormatter: [Helper.Formatters.inputHashFormatter],
     name: 'sendSignedTransaction',

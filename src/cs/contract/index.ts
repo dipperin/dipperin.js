@@ -276,8 +276,8 @@ class Contract extends Core {
   getContractDetail: (
     address: string,
     cb?: Callback
-  ) => ReturnType<
-    typeof Helper.Formatters.outputContractDetailFormatter
+  ) => Promise<
+    ReturnType<typeof Helper.Formatters.outputContractDetailFormatter>
   > = this.buildCall({
     call: 'chainstack_getContract',
     name: 'getContractDetail',
