@@ -20,6 +20,7 @@ class CS extends Core {
   setProvider(provider: string | Provider, net?: any): void {
     super.setProvider(provider, net)
     this.personal.setProvider(provider, net)
+    this.contract.setProvider(provider, net)
   }
 
   getBalance: (
