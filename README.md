@@ -3,30 +3,67 @@
 
 Javascript API for integration with Chainstack blockchains using Chainstack RPC API.
 
-## Installing / Getting started
+## Installation
 
-### NodeJS
+Use your favorite package manager to download it.
 
 ```shell
-npm install @tchainstack/chainstack.js
-
+yarn add @tchainstack/chainstack.js
 // or
-
-yarn add -S @tchainstack/chainstack.js
+npm install --save @tchainstack/chainstack.js
 ```
 
-## Basic Usage
+## Development
 
-//TODO: 添加基本使用攻略
+### Dependencies
 
-## Developing
+- Node.js v8.x
+- Yarn
 
-//TODO: 添加开发攻略
+### Initialization
 
-## Versioning
+```shell
+git clone https://github.com/caiqingfeng/chainstack.jsgit
+cd chainstack.js
+yarn
+```
 
-We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
+### Develop
 
-## Licensing
+```shell
+yarn dev
+```
 
-State what the license is and how to find the text version of the license.
+### Build
+
+```shell
+yarn build
+```
+
+## Testing
+
+Running unit test
+
+```shell
+yarn test
+```
+
+Running unit test in watch mode
+
+```shell
+yarn test:watch
+```
+
+## Contributing
+
+### [Code of Conduct](https://github.com/caiqingfeng/chainstack.js/blob/master/CODE_OF_CONDUCT.md)
+
+Chainstack has adopted a Code of Conduct that we expect project participants to adhere to. Please read the full text so that you can understand what actions will and will not be tolerated.
+
+### [Contributing Guide](https://github.com/caiqingfeng/chainstack.js/blob/master/CONTRIBUTING.md)
+
+Read our contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to this project.
+
+## License
+
+[Apache License 2.0](https://github.com/caiqingfeng/chainstack-wallet/blob/master/LICENSE)
