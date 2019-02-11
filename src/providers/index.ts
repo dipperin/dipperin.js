@@ -1,8 +1,6 @@
 export { default as HttpProvider } from './httpProvider'
-export { default as IpcProvider } from './ipcProvider'
 export { default as WebsocketProvider } from './wsProvider'
 import HttpProvider from './httpProvider'
-import IpcProvider from './ipcProvider'
 import WebsocketProvider from './wsProvider'
 
 export interface Payload {
@@ -30,6 +28,5 @@ export interface Provider {
 
 export default {
   HttpProvider,
-  IpcProvider,
   WebsocketProvider
 }

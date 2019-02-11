@@ -1,5 +1,4 @@
 import { Provider } from '../providers'
-import { Socket } from 'net'
 import RequestManager, {
   BatchManager,
   ProvidersInterface
@@ -14,9 +13,9 @@ class Core {
   requestManager: RequestManager
   BatchRequest: BatchManager
 
-  constructor(provider: string | Provider, net?: Socket) {
+  constructor(provider: string | Provider) {
     this.requestManager = new RequestManager()
-    this.requestManager.setProvider(provider, net)
+    this.requestManager.setProvider(provider)
 
     this.providers = RequestManager.providers
     this.provider = this.requestManager.provider
@@ -32,8 +31,8 @@ class Core {
     this.setProvider(value)
   }
 
-  setProvider(provider: string | Provider, net?: Socket): void {
-    this.requestManager.setProvider(provider, net)
+  setProvider(provider: string | Provider): void {
+    this.requestManager.setProvider(provider)
     this.provider = this.requestManager.provider
   }
 

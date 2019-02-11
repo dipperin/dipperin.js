@@ -3,7 +3,7 @@
 const Chainstack = require('./build/main').default
 // const helper = require('./build/module').helper
 
-const chainstack = new Chainstack('ws://10.200.0.139:10002')
+const chainstack = new Chainstack('http://10.200.0.139:10002')
 
 // chainstack.cs.requestManager.send(
 //   {
@@ -25,14 +25,14 @@ const chainstack = new Chainstack('ws://10.200.0.139:10002')
 //   }
 // )
 
-const subscribe = chainstack.cs.subscribeBlock().on('data', (err, res) => {
-  console.log(err)
-})
+// const subscribe = chainstack.cs.subscribeBlock().on('data', (err, res) => {
+//   console.log(err)
+// })
 
-setTimeout(() => {
-  console.log('unsubscribe')
-  subscribe.unsubscribe(console.log)
-}, 10000)
+// setTimeout(() => {
+//   console.log('unsubscribe')
+//   subscribe.unsubscribe(console.log)
+// }, 10000)
 
 // let json = {
 //   coin_base: "",
@@ -53,7 +53,7 @@ setTimeout(() => {
 //   ]
 // }
 
-// chainstack.net.isConnecting().then(console.log)
+chainstack.net.isConnecting().then(console.log)
 // chainstack.cs.getBalance('0x0000d28Eb0154A96F4af6E631766939593554c7E5577').then(console.log)
 // chainstack.cs.getTransaction('0x060c6b530bb7aac625293a162bbfe694bcdd779b0d21eafb92a56f07c8ddac82').then(console.log)
 

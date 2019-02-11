@@ -1,9 +1,7 @@
-import { isNil, isString, isFunction, isArray, isObject, noop } from 'lodash'
-import { Socket } from 'net'
+import { isNil, isString, isFunction, isArray, noop } from 'lodash'
 import Helper from '../../helper'
 import {
   HttpProvider,
-  IpcProvider,
   Provider,
   WebsocketProvider,
   Callback,
@@ -14,7 +12,6 @@ export { default as BatchManager } from './batchManager'
 
 export interface ProvidersInterface {
   HttpProvider: typeof HttpProvider
-  IpcProvider: typeof IpcProvider
   WebsocketProvider: typeof WebsocketProvider
 }
 
@@ -30,7 +27,6 @@ type Subscriptions = Map<
 class RequestManager {
   static providers: ProvidersInterface = {
     HttpProvider,
-    IpcProvider,
     WebsocketProvider
   }
   provider: Provider
@@ -44,14 +40,14 @@ class RequestManager {
     this.setProvider(provider)
   }
 
-  setProvider = (newProvider: string | Provider, net?: Socket) => {
+  setProvider = (newProvider: string | Provider) => {
     let provider: Provider
     if (isNil(newProvider)) {
       return
     }
 
     provider = isString(newProvider)
-      ? this.getProviderFromPath(newProvider as string, net)
+      ? this.getProviderFromPath(newProvider as string)
       : newProvider
     this.provider = provider || null
 
@@ -75,7 +71,7 @@ class RequestManager {
   send = (data: Payload, callback?: Callback) => {
     const cb = isFunction(callback) ? callback : noop
     if (!this.provider) {
-      return callback(new Helper.Errors.InvalidProviderError())
+      return cb(new Helper.Errors.InvalidProviderError())
     }
 
     const payload = JsonRpc.toPayload(data.method, data.params)
@@ -170,7 +166,7 @@ class RequestManager {
     }
   }
 
-  private getProviderFromPath = (path: string, net?: Socket): Provider => {
+  private getProviderFromPath = (path: string): Provider => {
     switch (true) {
       case !this.providers:
         return null
@@ -178,8 +174,6 @@ class RequestManager {
         return new this.providers.HttpProvider(path)
       case /^ws(s)?:\/\//i.test(path):
         return new this.providers.WebsocketProvider(path)
-      case isObject(net) && isFunction(net.connect):
-        return new this.providers.IpcProvider(path, net)
       default:
         throw new Helper.Errors.InvalidProviderPathError(path)
     }

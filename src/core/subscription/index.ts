@@ -44,20 +44,7 @@ class Subscription extends EventEmitter {
       return this
     }
 
-    if (!this.options.requestManager.provider) {
-      const err = new Helper.Errors.InvalidProviderError()
-      this.callback(err, null, this)
-      this.emit('error', err)
-      return this
-    }
-
-    // throw error, if provider doesnt support subscriptions
-    if (!this.options.requestManager.provider.on) {
-      const err = new Helper.Errors.UnsupportedSubscriptionsProviderError(
-        this.options.requestManager.provider.constructor.name
-      )
-      this.callback(err, null, this)
-      this.emit('error', err)
+    if (!this.checkEnv()) {
       return this
     }
 
@@ -131,6 +118,27 @@ class Subscription extends EventEmitter {
 
     // return an object to cancel the subscription
     return this
+  }
+
+  private checkEnv(): boolean {
+    if (!this.options.requestManager.provider) {
+      const err = new Helper.Errors.InvalidProviderError()
+      this.callback(err, null, this)
+      this.emit('error', err)
+      return false
+    }
+
+    // throw error, if provider doesnt support subscriptions
+    if (!this.options.requestManager.provider.on) {
+      const err = new Helper.Errors.UnsupportedSubscriptionsProviderError(
+        this.options.requestManager.provider.constructor.name
+      )
+      this.callback(err, null, this)
+      this.emit('error', err)
+      return false
+    }
+
+    return true
   }
 
   private extractCallback(args: any[]): any {

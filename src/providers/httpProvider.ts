@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosError } from 'axios'
 import Helper from '../helper'
 import { Provider, Callback } from './index'
 
@@ -37,23 +37,33 @@ class HttpProvider implements Provider {
       })
       callback(null, res.data)
     } catch (error) {
-      let err = error
-      switch (error.status) {
-        case 404:
-          this.connected = false
-          err = new Helper.Errors.InvalidConnectionError(this.host)
-          break
-        case 500:
-          err = new Helper.Errors.ResponseError(error.data.error)
-          break
-        case 400:
-          err = new Helper.Errors.ResponseError(error.data.error)
-          break
-        default:
-          this.connected = false
-          err = new Helper.Errors.InvalidConnectionError(this.host)
-          break
+      const resErr = error as AxiosError
+      let err: Error
+      if (resErr.response) {
+        switch (resErr.response.status) {
+          case 404:
+            this.connected = false
+            err = new Helper.Errors.InvalidConnectionError(this.host)
+            break
+          case 405:
+            this.connected = false
+            err = new Helper.Errors.ResponseError(resErr.response.statusText)
+            break
+          case 500:
+            err = new Helper.Errors.ResponseError(resErr.response.data.error)
+            break
+          case 400:
+            err = new Helper.Errors.ResponseError(resErr.response.data.error)
+            break
+          default:
+            this.connected = false
+            err = new Helper.Errors.InvalidConnectionError(this.host)
+            break
+        }
+      } else {
+        err = new Error(resErr.message)
       }
+
       callback(err, null)
     }
   }
@@ -66,11 +76,9 @@ class HttpProvider implements Provider {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     }
-    if (Array.isArray(this.headers)) {
-      this.headers.forEach((header: HeaderConfig) => {
-        headers[header.name] = header.value
-      })
-    }
+    this.headers.forEach((header: HeaderConfig) => {
+      headers[header.name] = header.value
+    })
     return axios.create({
       baseURL: this.host,
       headers,

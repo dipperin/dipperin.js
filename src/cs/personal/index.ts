@@ -1,9 +1,10 @@
 import Core from '../../core'
 import Helper from '../../helper'
+import { Provider } from '../../providers'
 
 class Personal extends Core {
-  constructor(provider, net?: any) {
-    super(provider, net)
+  constructor(provider: string | Provider) {
+    super(provider)
   }
 
   newWallet = this.buildCall({
