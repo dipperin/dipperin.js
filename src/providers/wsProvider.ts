@@ -20,6 +20,13 @@ interface Response {
 }
 
 type NotificationCallback = (res?: any) => void
+type EventCallback = (e: any) => void
+
+interface MsgEvent {
+  data: ws.Data
+  type: string
+  target: ws
+}
 
 interface ResponseCallbacks {
   [propName: string]: Callback
@@ -63,8 +70,13 @@ class WebsocketProvider implements Provider {
       }, 10)
       return
     }
+
     if (!this.isConnect()) {
-      if (isFunction(this.connection.onerror)) {
+      if (isArray(this.connection.onerror)) {
+        this.connection.onerror.forEach(onerror => {
+          onerror(new Helper.Errors.InvalidConnectionError(this.url))
+        })
+      } else if (isFunction(this.connection.onerror)) {
         this.connection.onerror(
           new Helper.Errors.InvalidConnectionError(this.url)
         )
@@ -72,6 +84,7 @@ class WebsocketProvider implements Provider {
       callback(new Helper.Errors.InvalidConnectionError(this.url))
       return
     }
+
     this.connection.send(JSON.stringify(payload))
     this.addResponseCallback(payload, callback)
   }
@@ -81,7 +94,7 @@ class WebsocketProvider implements Provider {
    * @param type
    * @param callback
    */
-  on(type: string, callback: Callback): void {
+  on(type: string, callback: EventCallback): void {
     if (!isFunction(callback)) {
       throw new Helper.Errors.InvalidCallbackError()
     }
@@ -91,21 +104,15 @@ class WebsocketProvider implements Provider {
         this.notificationCallbacks.push(callback)
         break
       case 'connect':
-        this.connection.onopen = () => {
-          callback()
-        }
+        this.connection.onopen = callback
         break
 
-      case 'end':
-        this.connection.onclose = () => {
-          callback()
-        }
+      case 'close':
+        this.connection.onclose = callback
         break
 
       case 'error':
-        this.connection.onerror = () => {
-          callback()
-        }
+        this.connection.onerror = callback
         break
     }
   }
@@ -116,11 +123,11 @@ class WebsocketProvider implements Provider {
    * @param type
    * @param callback
    */
-  removeListener(type: string, callback): void {
+  removeListener(type: string, callback: Callback): void {
     switch (type) {
       case 'data':
         this.notificationCallbacks = this.notificationCallbacks.filter(
-          cb => cb === callback
+          cb => cb !== callback
         )
         break
     }
@@ -184,9 +191,8 @@ class WebsocketProvider implements Provider {
    *
    * @param e
    */
-  private onMessage = (e): void => {
+  private onMessage = (e: MsgEvent): void => {
     const data: string = isString(e.data) ? e.data : ''
-
     this.parseResponse(data).forEach(result => {
       let id = null
 

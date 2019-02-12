@@ -13,7 +13,7 @@ describe('net', () => {
   it('isConnecting, success', () => {
     const provider = new HttpProvider('http://localhost:8888')
     const net = new Net(provider)
-    const mockGetConnecting = jest.fn(() => true)
+    const mockGetConnecting = jest.fn().mockImplementation(() => true)
     net.getConnecting = mockGetConnecting
 
     net.isConnecting((res: boolean) => {

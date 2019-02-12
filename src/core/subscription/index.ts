@@ -2,6 +2,7 @@ import EventEmitter from 'eventemitter3'
 import { isArray, isFunction, noop } from 'lodash'
 import Helper from '../../helper'
 import RequestManager from '../requestManager'
+import { Callback } from '../../providers'
 
 type Formatter = (...args: any[]) => any
 
@@ -19,14 +20,11 @@ class Subscription extends EventEmitter {
   options: SubscriptionOptions
   subscriptionMethod: string
 
-  private reconnectIntervalId: any
-
   constructor(options: SubscriptionOptions) {
     super()
 
     this.id = null
     this.callback = noop
-    this.reconnectIntervalId = null
     this.options = options
   }
 
@@ -34,15 +32,10 @@ class Subscription extends EventEmitter {
     this.options.requestManager.removeSubscription(this.id, callback)
     this.id = null
     this.removeAllListeners()
-    clearInterval(this.reconnectIntervalId)
   }
 
   subscribe(...args: any[]): Subscription {
     const payload = this.toPayload(args)
-
-    if (!payload) {
-      return this
-    }
 
     if (!this.checkEnv()) {
       return this
@@ -64,48 +57,7 @@ class Subscription extends EventEmitter {
           this.id,
           payload.params[0],
           payload.params[0],
-          (err, res) => {
-            let result = res
-            if (!err) {
-              if (!isArray(result)) {
-                result = [result]
-              }
-
-              result.forEach((resultItem: any) => {
-                const output = this.formatOutput(resultItem)
-
-                this.emit('data', output)
-
-                // call the callback, last so that unsubscribe there won't affect the emit above
-                if (isFunction(this.callback)) {
-                  this.callback(null, output, this)
-                }
-              })
-            } else {
-              // unsubscribe, but keep listeners
-              this.options.requestManager.removeSubscription(this.id)
-
-              // re-subscribe, if connection fails
-              if (this.options.requestManager.provider.once) {
-                this.reconnectIntervalId = setInterval(() => {
-                  if (this.options.requestManager.provider.reconnect) {
-                    this.options.requestManager.provider.reconnect()
-                  }
-                }, 500)
-
-                this.options.requestManager.provider.once('connect', () => {
-                  clearInterval(this.reconnectIntervalId)
-                  this.subscribe(this.callback)
-                })
-              }
-              this.emit('error', err)
-
-              // call the callback, last so that unsubscribe there won't affect the emit above
-              if (isFunction(this.callback)) {
-                this.callback(err, null, this)
-              }
-            }
-          }
+          this.buildSubscriptionCallback()
         )
       } else if (isFunction(this.callback)) {
         this.callback(err, null, this)
@@ -120,10 +72,46 @@ class Subscription extends EventEmitter {
     return this
   }
 
+  private buildSubscriptionCallback(): Callback {
+    return (err, res) => {
+      let result = res
+      if (!err) {
+        if (!isArray(result)) {
+          result = [result]
+        }
+
+        result.forEach((resultItem: any) => {
+          const output = this.formatOutput(
+            resultItem,
+            this.options.outputFormatter
+          )
+
+          this.emit('data', output)
+
+          // call the callback, last so that unsubscribe there won't affect the emit above
+          if (isFunction(this.callback)) {
+            this.callback(null, output, this)
+          }
+        })
+      } else {
+        // unsubscribe, but keep listeners
+        this.options.requestManager.removeSubscription(this.id)
+
+        this.emit('error', err)
+
+        // call the callback, last so that unsubscribe there won't affect the emit above
+        if (isFunction(this.callback)) {
+          this.callback(err, null, this)
+        }
+      }
+    }
+  }
+
   private checkEnv(): boolean {
+    const callback = isFunction(this.callback) ? this.callback : noop
     if (!this.options.requestManager.provider) {
       const err = new Helper.Errors.InvalidProviderError()
-      this.callback(err, null, this)
+      callback(err, null, this)
       this.emit('error', err)
       return false
     }
@@ -133,7 +121,7 @@ class Subscription extends EventEmitter {
       const err = new Helper.Errors.UnsupportedSubscriptionsProviderError(
         this.options.requestManager.provider.constructor.name
       )
-      this.callback(err, null, this)
+      callback(err, null, this)
       this.emit('error', err)
       return false
     }
@@ -159,31 +147,27 @@ class Subscription extends EventEmitter {
     }
   }
 
-  private formatInput(args: any[]): any[] {
-    if (!this.options.inputFormatter) {
+  private formatInput(args: any[], inputFormatter?: Formatter[]): any[] {
+    if (!inputFormatter) {
       return args
     }
 
-    const formattedArgs = this.options.inputFormatter.map(
-      (formatter, index) => {
-        return formatter ? formatter(args[index]) : args[index]
-      }
-    )
+    const formattedArgs = inputFormatter.map((formatter, index) => {
+      return formatter ? formatter(args[index]) : args[index]
+    })
 
     return formattedArgs
   }
 
-  private formatOutput(result: any): any {
-    return this.options.outputFormatter && result
-      ? this.options.outputFormatter(result)
-      : result
+  private formatOutput(result: any, outputFormatter?: Formatter): any {
+    return outputFormatter && result ? outputFormatter(result) : result
   }
 
   private toPayload(args: any[]): PayloadObject {
     let params = []
     let thatArgs = args
     this.callback = this.extractCallback(thatArgs)
-    thatArgs = this.formatInput(thatArgs)
+    thatArgs = this.formatInput(thatArgs, this.options.inputFormatter)
 
     this.validateArgs(thatArgs)
 

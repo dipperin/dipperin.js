@@ -4,9 +4,11 @@ import HttpProvider from './httpProvider'
 
 jest.mock('axios')
 
+const mockAxios = (axios as any) as jest.Mock<typeof axios>
+
 describe('Providers/HttpProvider', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    mockAxios.mockClear()
   })
 
   it('send, Send a request and get the normal return value', done => {
