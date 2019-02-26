@@ -1,13 +1,18 @@
 import Core from '../../core'
 import Helper from '../../helper'
-import { Provider } from '../../providers'
+import { Provider, Callback } from '../../providers'
 
 class Personal extends Core {
   constructor(provider: string | Provider) {
     super(provider)
   }
 
-  newWallet = this.buildCall({
+  newWallet: (
+    password: string,
+    passPhrase?: string,
+    walletIdentifier?: string,
+    cb?: Callback<string>
+  ) => Promise<string> = this.buildCall({
     name: 'newWallet',
     call: 'chainstack_establishWallet',
     params: 3,
@@ -18,21 +23,34 @@ class Personal extends Core {
     ]
   })
 
-  openWallet = this.buildCall({
+  openWallet: (
+    password: string,
+    walletIdentifier?: string,
+    cb?: Callback<void>
+  ) => Promise<void> = this.buildCall({
     name: 'openWallet',
     call: 'chainstack_openWallet',
     params: 2,
     inputFormatter: [null, Helper.Formatters.inputPlaceholderFormatter]
   })
 
-  closeWallet = this.buildCall({
+  closeWallet: (
+    walletIdentifier?: string,
+    cb?: Callback<void>
+  ) => Promise<void> = this.buildCall({
     name: 'closeWallet',
     call: 'chainstack_closeWallet',
     params: 1,
     inputFormatter: [Helper.Formatters.inputPlaceholderFormatter]
   })
 
-  restoreWallet = this.buildCall({
+  restoreWallet: (
+    password: string,
+    mnemonic: string,
+    passPhrase?: string,
+    walletIdentifier?: string,
+    cb?: Callback<void>
+  ) => Promise<void> = this.buildCall({
     name: 'restoreWallet',
     call: 'chainstack_restoreWallet',
     params: 4,
@@ -44,40 +62,44 @@ class Personal extends Core {
     ]
   })
 
-  listWalletAccount = this.buildCall({
+  listWalletAccount: (
+    walletIdentifier?: string,
+    cb?: Callback<string[]>
+  ) => Promise<string[]> = this.buildCall({
     name: 'listWalletAccount',
     call: 'chainstack_listWalletAccount',
     params: 1
   })
 
-  listAllWallet = this.buildCall({
+  listAllWallet: (
+    cb?: Callback<string[]>
+  ) => Promise<string[]> = this.buildCall({
     name: 'listAllWallet',
     call: 'chainstack_listWallet',
-    params: 1
-  })
-
-  getWalletAccounts = this.buildCall({
-    name: 'getWalletAccounts',
-    call: 'chainstack_curGetWalletAccount',
     params: 0
   })
 
-  getWalletBalance = this.buildCall({
-    name: 'getWalletBalance',
-    call: 'chainstack_curGetWalletBalance',
-    params: 0
-  })
-
-  addAccount = this.buildCall({
+  addAccount: (
+    derivationPath: string,
+    walletIdentifier?: string,
+    cb?: Callback<string>
+  ) => Promise<string> = this.buildCall({
     name: 'addAccount',
     call: 'chainstack_addAccount',
     params: 2
   })
 
-  send = this.buildCall({
+  send: (
+    from: string,
+    to: string,
+    value: string,
+    fee: string,
+    nonce: number,
+    cb?: Callback<string>
+  ) => Promise<string> = this.buildCall({
     name: 'send',
     call: 'chainstack_sendTransaction',
-    params: 4
+    params: 5
   })
 }
 

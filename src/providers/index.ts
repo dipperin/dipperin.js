@@ -10,8 +10,8 @@ export interface Payload {
   params: any[]
 }
 
-export interface Callback {
-  (err?: Error, res?: any): void
+export interface Callback<T = any> {
+  (err?: Error, res?: T): void
   method?: string
 }
 
