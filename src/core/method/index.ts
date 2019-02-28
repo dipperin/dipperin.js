@@ -1,7 +1,7 @@
 import { isFunction, isArray } from 'lodash'
 import Helper from '../../helper'
 import Utils from '../../utils'
-import PromiEvent from '../promiEvent'
+import PromiEvent, { Promisify } from '../promiEvent'
 import RequestManager from '../requestManager'
 import { Callback } from '../../providers'
 
@@ -23,7 +23,7 @@ export interface MethodOptions {
   requestManager?: RequestManager
 }
 
-function Method<T>(options: MethodOptions): (...args: any[]) => T {
+function Method(options: MethodOptions): (...args: any[]) => any {
   if (!options.call || !options.name) {
     throw new Helper.Errors.InvalidMethodParamsError()
   }
@@ -40,41 +40,11 @@ function Method<T>(options: MethodOptions): (...args: any[]) => T {
       args
     )
 
-    const sendCallback = (error: any, result: any) => {
-      let err = error
-      let res = result
-
-      try {
-        res = formatOutput(options.outputFormatter, result)
-      } catch (e) {
-        err = e
-      }
-
-      if (res instanceof Error) {
-        err = res
-      }
-
-      if (!err) {
-        if (payload.callback) {
-          payload.callback(null, res)
-        }
-      } else {
-        if (err.error) {
-          err = err.error
-        }
-
-        return Utils.fireError(
-          err,
-          defer.eventEmitter,
-          defer.reject,
-          payload.callback
-        )
-      }
-
-      if (!err) {
-        defer.resolve(res)
-      }
-    }
+    const sendCallback = buildSendCallback(
+      options.outputFormatter,
+      payload,
+      defer
+    )
 
     if (!(options.requestManager instanceof RequestManager)) {
       throw new Helper.Errors.InvalidRequestManagerError()
@@ -83,6 +53,39 @@ function Method<T>(options: MethodOptions): (...args: any[]) => T {
     options.requestManager.send(payload, sendCallback)
 
     return defer.eventEmitter
+  }
+}
+
+export function buildSendCallback(
+  outputFormatter: Formatter,
+  payload: PayloadObject,
+  defer: Promisify
+): Callback {
+  return (error, result: any) => {
+    let err = error
+    let res = result
+
+    try {
+      res = formatOutput(outputFormatter, result)
+    } catch (e) {
+      err = e
+    }
+
+    if (res instanceof Error) {
+      err = res
+    }
+
+    if (!err) {
+      if (payload.callback) {
+        payload.callback(null, res)
+      }
+    } else {
+      Utils.fireError(err, defer.reject, payload.callback)
+    }
+
+    if (!err) {
+      defer.resolve(res)
+    }
   }
 }
 
@@ -110,7 +113,7 @@ export function toPayload(
 }
 
 /**
- * Should be used to extract callback from array of arguments. Modifies input param
+ * Should be used to extract callback from array of arguments.
  *
  * @param args
  * @return callback, if exists

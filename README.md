@@ -23,7 +23,7 @@ npm install --save @tchainstack/chainstack.js
 ### Initialization
 
 ```shell
-git clone https://github.com/caiqingfeng/chainstack.jsgit
+git clone https://github.com/caiqingfeng/chainstack.js.git
 cd chainstack.js
 yarn
 ```

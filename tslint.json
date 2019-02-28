@@ -30,7 +30,7 @@
     "no-shadowed-variable": false,
 
     // Functional style rules
-    // "no-console": false,
+    "no-console": false,
     "no-this": false,
     "no-class": false,
     "no-mixed-interface": false,

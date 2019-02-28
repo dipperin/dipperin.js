@@ -9,8 +9,8 @@ const CONTRACT_TYPE_ERC20 = 'ERC20'
 // FIXME: Now only support ERC20
 
 class Contract extends Core {
-  constructor(provider: Provider | string, net?: any) {
-    super(provider, net)
+  constructor(provider: Provider | string) {
+    super(provider)
   }
 
   /**

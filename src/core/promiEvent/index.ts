@@ -1,41 +1,25 @@
-import EventEmitter from 'eventemitter3'
-
-export class PromiseWithEvent {
+export class Promisify {
   resolve: any
   reject: any
-  eventEmitter
-  constructor(justPromise?: boolean) {
-    this.eventEmitter = new Promise((...args) => {
-      this.resolve = args[0]
-      this.reject = args[1]
+  eventEmitter: InstanceType<typeof Promise>
+  constructor() {
+    this.eventEmitter = new Promise((resolve, reject) => {
+      this.resolve = resolve
+      this.reject = reject
     })
-    if (justPromise) {
-      return
-    }
-    const eventEmitter = new EventEmitter()
-
-    this.eventEmitter['_events'] = eventEmitter['_events']
-    this.eventEmitter.emit = eventEmitter.emit
-    this.eventEmitter.on = eventEmitter.on
-    this.eventEmitter.once = eventEmitter.once
-    this.eventEmitter.off = eventEmitter.off
-    this.eventEmitter.listeners = eventEmitter.listeners
-    this.eventEmitter.addListener = eventEmitter.addListener
-    this.eventEmitter.removeListener = eventEmitter.removeListener
-    this.eventEmitter.removeAllListeners = eventEmitter.removeAllListeners
   }
 }
 
-export type PromiEventInterface = { resolve?: (value: any) => any } & ((
-  justPromise?: boolean
-) => PromiseWithEvent)
+export type PromiEventInterface = {
+  resolve?: (value: any) => any
+} & (() => Promisify)
 
-const PromiEvent: PromiEventInterface = (justPromise?: boolean) => {
-  return new PromiseWithEvent(justPromise)
+const PromiEvent: PromiEventInterface = () => {
+  return new Promisify()
 }
 
 PromiEvent.resolve = value => {
-  const promise = PromiEvent(true)
+  const promise = PromiEvent()
   promise.resolve(value)
   return promise.eventEmitter
 }

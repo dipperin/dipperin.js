@@ -9,16 +9,16 @@ class ChainStack extends Package {
   cs: CS
   net: Net
 
-  constructor(provider: string | Provider, net?: any) {
-    super(provider, net)
+  constructor(provider: string | Provider) {
+    super(provider)
     this.utils = Utils
-    this.cs = new CS(provider, net)
-    this.net = new Net(provider, net)
+    this.cs = new CS(provider)
+    this.net = new Net(provider)
   }
-  setProvider(provider: string | Provider, net?: any): void {
-    super.setProvider(provider, net)
-    this.cs.setProvider(provider, net)
-    this.net.setProvider(provider, net)
+  setProvider(provider: string | Provider): void {
+    super.setProvider(provider)
+    this.cs.setProvider(provider)
+    this.net.setProvider(provider)
   }
 }
 

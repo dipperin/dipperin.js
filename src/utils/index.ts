@@ -1,12 +1,5 @@
 import BN from 'bignumber.js'
-import {
-  isObject,
-  isArray,
-  isString,
-  isFunction,
-  isUndefined,
-  isNumber
-} from 'lodash'
+import { isString, isFunction, isUndefined, isNumber } from 'lodash'
 import Helper from '../helper'
 import {
   checkAddressChecksum,
@@ -30,16 +23,14 @@ import {
   formatNumberToHex,
   formatUtf8ToHex
 } from './utils'
+import { Callback } from '../providers'
 
-export const fireError = (error, emitter, reject, callback) => {
+export const fireError = (
+  error: Error,
+  reject: PromiseRejectionEvent,
+  callback: Callback
+) => {
   let err = error
-  if (isObject(err) && !(err instanceof Error) && err.data) {
-    if (isObject(err.data) || isArray(err.data)) {
-      err.data = JSON.stringify(err.data, null, 2)
-    }
-
-    err = `${error.message}\n'${error.data}`
-  }
 
   if (isString(err)) {
     err = new Error(err)
@@ -48,31 +39,10 @@ export const fireError = (error, emitter, reject, callback) => {
   if (isFunction(callback)) {
     callback(err)
   }
+
   if (isFunction(reject)) {
-    // suppress uncatched error if an error listener is present
-    // OR suppress uncatched error if an callback listener is present
-    if (
-      (emitter &&
-        (isFunction(emitter.listeners) && emitter.listeners('error').length)) ||
-      isFunction(callback)
-    ) {
-      emitter.catch(noop)
-    }
-    // reject later, to be able to return emitter
-    setImmediate(() => {
-      reject(error)
-    })
+    reject(error)
   }
-
-  if (emitter && isFunction(emitter.emit)) {
-    // emit later, to be able to return emitter
-    setImmediate(() => {
-      emitter.emit('error', error)
-      emitter.removeAllListeners()
-    })
-  }
-
-  return emitter
 }
 
 export const toChecksumAddress = (address: string) => {

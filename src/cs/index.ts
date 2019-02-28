@@ -1,26 +1,26 @@
 import Core from '../core'
 import Helper from '../helper'
-import { Provider, Callback } from '../providers'
+import { Callback, Provider } from '../providers'
+import Contract from './contract'
 import Personal from './personal'
 import Wallet from './wallet'
-import Contract from './contract'
 
 class CS extends Core {
   personal: Personal
   contract: Contract
   wallet: Wallet
-  constructor(provider, net?: any) {
-    super(provider, net)
+  constructor(provider: string | Provider) {
+    super(provider)
 
-    this.contract = new Contract(provider, net)
-    this.personal = new Personal(provider, net)
+    this.contract = new Contract(provider)
+    this.personal = new Personal(provider)
     this.wallet = new Wallet()
   }
 
-  setProvider(provider: string | Provider, net?: any): void {
-    super.setProvider(provider, net)
-    this.personal.setProvider(provider, net)
-    this.contract.setProvider(provider, net)
+  setProvider(provider: string | Provider): void {
+    super.setProvider(provider)
+    this.personal.setProvider(provider)
+    this.contract.setProvider(provider)
   }
 
   getBalance: (

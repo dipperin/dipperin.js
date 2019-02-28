@@ -78,7 +78,7 @@
   "devDependencies": {
     "@types/bip39": "^2.4.0",
     "@types/eventemitter3": "^2.0.2",
-    "@types/jest": "^23.1.0",
+    "@types/jest": "^23.3.14",
     "@types/js-base64": "^2.3.1",
     "@types/node": "^10.0.6",
     "@types/oboe": "^2.0.28",
@@ -88,8 +88,7 @@
     "@types/uuid": "^3.4.3",
     "@types/websocket": "0.0.39",
     "@types/ws": "^5.1.2",
-    "ava": "^1.0.0-beta.3",
-    "awesome-typescript-loader": "^5.1.1",
+    "awesome-typescript-loader": "^5.2.1",
     "axios-mock-adapter": "^1.15.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",
@@ -106,8 +105,9 @@
     "gh-pages": "^1.0.0",
     "git-cz": "^1.7.1",
     "husky": "^0.14.3",
-    "jest": "^23.1.0",
+    "jest": "23.6.0",
     "lint-staged": "^7.1.0",
+    "mock-socket": "^8.0.5",
     "np": "^3.0.4",
     "npm-scripts-info": "^0.3.6",
     "nsp": "^3.2.1",
@@ -116,12 +116,12 @@
     "source-map-explorer": "^1.5.0",
     "standard-version": "^4.0.0",
     "trash-cli": "^1.4.0",
-    "ts-jest": "^22.4.6",
-    "tslint": "^5.4.3",
-    "tslint-config-prettier": "^1.8.0",
-    "tslint-immutable": "^4.5.1",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-immutable": "^5.1.2",
     "typedoc": "^0.11.1",
-    "typescript": "^2.9.2",
+    "typescript": "^3.3.3",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
@@ -181,7 +181,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "./tsconfig.json"
+        "tsConfig": "./tsconfig.json"
       }
     }
   },
