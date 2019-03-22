@@ -110,4 +110,37 @@ describe('cs/transaction', () => {
     )
     expect(unSerializeTx2.recover()).toEqual(Helper.Account.fromPrivate(pk2))
   })
+
+  // it('getfee', () => {
+  //   const transactionResult2 = {
+  //     txData: {
+  //       nonce: '0x1',
+  //       to: '0x00014059a38f1e42bd9a415f4578cd6f347112951d8d',
+  //       hashLock:
+  //         '',
+  //       timeLock: 0,
+  //       value: '100000000',
+  //       fee: '1',
+  //       extraData: ''
+  //     }
+  //   }
+  //   const tx = new Transaction(transactionResult2)
+  //   // expect(tx.getFee()).toBe('')
+  //   tx.sign(pk1)
+  //   expect(tx.getFee()).toBe('')
+  //   /** unsign / signed */
+  //   // 80 145
+  //   // 104 169
+  //   // 72 137
+  //   // 70 135
+  //   // 40 106
+  //   /** fee / length */
+  //   // 0 10600
+  //   // 10 10600
+  //   // 100 10600
+  //   // 1000 10800
+  //   // 10000 10800
+  //   // 100000 10900
+
+  // })
 })

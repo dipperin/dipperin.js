@@ -1,6 +1,6 @@
 {
   "name": "@tchainstack/chainstack.js",
-  "version": "0.4.34",
+  "version": "0.4.35",
   "private": false,
   "description": "chainstack javascript lib",
   "main": "build/main/index.js",

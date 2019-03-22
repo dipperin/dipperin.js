@@ -97,12 +97,22 @@ class Transaction {
     )
   }
 
+  /**
+   * without witness length byte length = raw.length/2 -1
+   * witness length = 67
+   */
   getFee(): string {
-    // const raw = this.serialize()
-    // return raw.length
-    //   .toString()
+    const raw = this.serialize()
+    let rawByte = raw.length / 2 - 1
+    if (!this.transactionResult.witness.r) {
+      rawByte += 67
+    }
+    if (this.transactionResult.txData.fee === '0') {
+      rawByte += 3
+    }
+    return (rawByte * 100).toString()
     // TODO: 根据经济模型调整
-    return '10000'
+    // return '10000'
   }
 }
 
