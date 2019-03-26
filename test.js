@@ -1,9 +1,11 @@
 // milk peace ten assume extend penalty rally dizzy kingdom talent capital concert cradle capable cream immense ivory ignore sibling utility sleep rotate window net
 
-const Chainstack = require('./build/main').default
+const { helper } = require('./build/main')
 // const helper = require('./build/module').helper
 
-const chainstack = new Chainstack('http://10.200.0.139:10002')
+console.log(helper.Account.privateToPublicKey('aa55981863b0ebeb1163a35c0738f22d2d12bac1bbf73ba8f6d29af77bfbe980'))
+
+// const chainstack = new Chainstack('http://10.200.0.139:10002')
 
 // chainstack.cs.requestManager.send(
 //   {
@@ -53,7 +55,7 @@ const chainstack = new Chainstack('http://10.200.0.139:10002')
 //   ]
 // }
 
-chainstack.net.isConnecting().then(console.log)
+// chainstack.net.isConnecting().then(console.log)
 // chainstack.cs.getBalance('0x0000d28Eb0154A96F4af6E631766939593554c7E5577').then(console.log)
 // chainstack.cs.getTransaction('0x060c6b530bb7aac625293a162bbfe694bcdd779b0d21eafb92a56f07c8ddac82').then(console.log)
 
