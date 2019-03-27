@@ -110,7 +110,8 @@ const fromNumber = (num: number): string =>
  *
  * @param bytes
  */
-const toNumber = (bytes: string): number => parseInt(bytes.slice(2), 16)
+const toNumber = (bytes: string): number =>
+  bytes.slice(2) === '' ? 0 : parseInt(bytes.slice(2), 16)
 
 /**
  * concat two bytes string

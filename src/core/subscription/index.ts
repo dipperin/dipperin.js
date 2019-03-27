@@ -176,7 +176,7 @@ class Subscription extends EventEmitter {
     params = params.concat(thatArgs)
 
     return {
-      method: 'chainstack_subscribe',
+      method: 'dipperin_subscribe',
       params
     }
   }

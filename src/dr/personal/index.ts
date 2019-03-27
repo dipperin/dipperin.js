@@ -14,7 +14,7 @@ class Personal extends Core {
     cb?: Callback<string>
   ) => Promise<string> = this.buildCall({
     name: 'newWallet',
-    call: 'chainstack_establishWallet',
+    call: 'dipperin_establishWallet',
     params: 3,
     inputFormatter: [
       null,
@@ -29,7 +29,7 @@ class Personal extends Core {
     cb?: Callback<void>
   ) => Promise<void> = this.buildCall({
     name: 'openWallet',
-    call: 'chainstack_openWallet',
+    call: 'dipperin_openWallet',
     params: 2,
     inputFormatter: [null, Helper.Formatters.inputPlaceholderFormatter]
   })
@@ -39,7 +39,7 @@ class Personal extends Core {
     cb?: Callback<void>
   ) => Promise<void> = this.buildCall({
     name: 'closeWallet',
-    call: 'chainstack_closeWallet',
+    call: 'dipperin_closeWallet',
     params: 1,
     inputFormatter: [Helper.Formatters.inputPlaceholderFormatter]
   })
@@ -52,7 +52,7 @@ class Personal extends Core {
     cb?: Callback<void>
   ) => Promise<void> = this.buildCall({
     name: 'restoreWallet',
-    call: 'chainstack_restoreWallet',
+    call: 'dipperin_restoreWallet',
     params: 4,
     inputFormatter: [
       null,
@@ -67,7 +67,7 @@ class Personal extends Core {
     cb?: Callback<string[]>
   ) => Promise<string[]> = this.buildCall({
     name: 'listWalletAccount',
-    call: 'chainstack_listWalletAccount',
+    call: 'dipperin_listWalletAccount',
     params: 1
   })
 
@@ -75,7 +75,7 @@ class Personal extends Core {
     cb?: Callback<string[]>
   ) => Promise<string[]> = this.buildCall({
     name: 'listAllWallet',
-    call: 'chainstack_listWallet',
+    call: 'dipperin_listWallet',
     params: 0
   })
 
@@ -85,7 +85,7 @@ class Personal extends Core {
     cb?: Callback<string>
   ) => Promise<string> = this.buildCall({
     name: 'addAccount',
-    call: 'chainstack_addAccount',
+    call: 'dipperin_addAccount',
     params: 2
   })
 
@@ -98,7 +98,7 @@ class Personal extends Core {
     cb?: Callback<string>
   ) => Promise<string> = this.buildCall({
     name: 'send',
-    call: 'chainstack_sendTransaction',
+    call: 'dipperin_sendTransaction',
     params: 5
   })
 }

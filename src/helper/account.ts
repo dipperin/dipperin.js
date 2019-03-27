@@ -126,6 +126,7 @@ export const decodeSignature = (hex: string): string[] => [
   Bytes.slice(0, 32, hex),
   Bytes.slice(32, 64, hex)
 ]
+// 0x56152e3f9ea2d36392dd3e0fd6a9f0658b8d2647fe6b8aa8a29f2e570a49eede3d2a0ab15e047b53c603e8b3bfc0f9a7abfb77e433deb8bdaf8a260c2f0280f6
 
 /**
  * Make a signer method
@@ -169,7 +170,6 @@ export const recover = (hash: string, signature: string): string => {
     s: vals[2].slice(2),
     v: Bytes.toNumber(vals[0])
   }
-
   const senderPublicKey = Secp256k1.recover(
     Buffer.from(hash.slice(2), 'hex'),
     Buffer.concat([Buffer.from(vrs.r, 'hex'), Buffer.from(vrs.s, 'hex')], 64),

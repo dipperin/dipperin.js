@@ -276,7 +276,7 @@ describe('Core/Subscription', () => {
     const rm = new RequestManager('ws://localhost:10000')
     rm.send = jest.fn().mockImplementation((payload, cb) => {
       expect(payload).toEqual({
-        method: 'chainstack_subscribe',
+        method: 'dipperin_subscribe',
         params: ['type', 2]
       })
       cb(null, 1)

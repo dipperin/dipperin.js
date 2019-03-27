@@ -8,7 +8,7 @@ class Net extends Core {
   }
 
   getConnecting: (cb?: Callback) => Promise<boolean> = this.buildCall({
-    call: 'chainstack_currentBlock',
+    call: 'dipperin_currentBlock',
     name: 'getConnecting',
     params: 0
   })

@@ -81,12 +81,12 @@ const webConfig = {
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'build/web'),
-    filename: 'chainstack.js',
+    filename: 'dipperin.js',
     libraryTarget: 'umd',
     library: {
-      root: 'Chainstack',
-      amd: 'Chainstack',
-      commonjs: 'Chainstack'
+      root: 'Dipperin',
+      amd: 'Dipperin',
+      commonjs: 'Dipperin'
     },
     umdNamedDefine: true
   }

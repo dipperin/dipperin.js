@@ -1,17 +1,17 @@
-import Chainstack from './index'
+import Dipperin from './index'
 import Provider from './providers/httpProvider'
-describe('chainstack', () => {
+describe('dipperin', () => {
   it('constructor', () => {
     expect(() => {
-      const chainstack = new Chainstack('http://localhost:8888')
-      return chainstack
+      const dipperin = new Dipperin('http://localhost:8888')
+      return dipperin
     }).not.toThrow()
   })
 
   it('setProvider', () => {
     const provider = new Provider('http://localhost:8888')
-    const chainstack = new Chainstack('http://localhost:8888')
-    chainstack.setProvider(provider)
-    expect(chainstack.provider).toEqual(provider)
+    const dipperin = new Dipperin('http://localhost:8888')
+    dipperin.setProvider(provider)
+    expect(dipperin.provider).toEqual(provider)
   })
 })

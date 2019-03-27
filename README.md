@@ -1,16 +1,16 @@
 
-# Chainstack.js
+# Dipperin.js
 
-Javascript API for integration with Chainstack blockchains using Chainstack RPC API.
+Javascript API for integration with Dipperin blockchains using Dipperin RPC API.
 
 ## Installation
 
 Use your favorite package manager to download it.
 
 ```shell
-yarn add @tchainstack/chainstack.js
+yarn add @dipperin/dipperin.js
 // or
-npm install --save @tchainstack/chainstack.js
+npm install --save @dipperin/dipperin.js
 ```
 
 ## Development
@@ -23,8 +23,8 @@ npm install --save @tchainstack/chainstack.js
 ### Initialization
 
 ```shell
-git clone https://github.com/caiqingfeng/chainstack.js.git
-cd chainstack.js
+git clone https://github.com/caiqingfeng/dipperin.js.git
+cd dipperin.js
 yarn
 ```
 
@@ -56,6 +56,6 @@ yarn test:watch
 
 ## Contributing
 
-### [Contributing Guide](https://github.com/caiqingfeng/chainstack.js/blob/master/CONTRIBUTING.md)
+### [Contributing Guide](https://github.com/caiqingfeng/dipperin.js/blob/master/CONTRIBUTING.md)
 
 Read our contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to this project.

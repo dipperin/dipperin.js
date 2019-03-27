@@ -1,40 +1,40 @@
 import Package from './core'
-import CS from './cs'
+import DR from './dr'
 import Net from './net'
 import { Provider } from './providers'
 import Utils from './utils'
 
-class ChainStack extends Package {
+class Dipperin extends Package {
   utils: any
-  cs: CS
+  dr: DR
   net: Net
 
   constructor(provider: string | Provider) {
     super(provider)
     this.utils = Utils
-    this.cs = new CS(provider)
+    this.dr = new DR(provider)
     this.net = new Net(provider)
   }
   setProvider(provider: string | Provider): void {
     super.setProvider(provider)
-    this.cs.setProvider(provider)
+    this.dr.setProvider(provider)
     this.net.setProvider(provider)
   }
 }
 
-export default ChainStack
+export default Dipperin
 
 export { default as Providers } from './providers'
 export { default as Utils } from './utils'
-export { default as Accounts } from './cs/accounts'
-export { default as Transaction } from './cs/transaction'
-export { default as Contract } from './cs/contract'
-export { default as Wallet } from './cs/wallet'
+export { default as Accounts } from './dr/accounts'
+export { default as Transaction } from './dr/transaction'
+export { default as Contract } from './dr/contract'
+export { default as Wallet } from './dr/wallet'
 export { default as net } from './net'
 export { default as helper } from './helper'
 export * from './providers'
 export * from './utils'
-export * from './cs/accounts'
-export * from './cs/transaction'
-export * from './cs/wallet'
+export * from './dr/accounts'
+export * from './dr/transaction'
+export * from './dr/wallet'
 export * from './net'

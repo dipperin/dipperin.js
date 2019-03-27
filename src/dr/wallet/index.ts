@@ -30,7 +30,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.getAccounts(indexOrAddress)
+   * dipperin.cs.wallet.getAccounts(indexOrAddress)
    * // =>
    * ```
    * @param indexOrAddress
@@ -48,7 +48,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.create(count, entropy)
+   * dipperin.cs.wallet.create(count, entropy)
    * // => Wallet
    * ```
    *
@@ -69,7 +69,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.add(privateKey)
+   * dipperin.cs.wallet.add(privateKey)
    * => [Account Object]
    * ```
    *
@@ -101,7 +101,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.remove(indexOrAddress)
+   * dipperin.cs.wallet.remove(indexOrAddress)
    * ```
    *
    * @param indexOrAddress
@@ -130,7 +130,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.clear()
+   * dipperin.cs.wallet.clear()
    * ```
    */
   clear(): this {
@@ -146,7 +146,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.wallet.decrypt([EncryptResult, ...], password)
+   * dipperin.cs.wallet.decrypt([EncryptResult, ...], password)
    * ```
    *
    * @param encryptedWallet
@@ -171,7 +171,7 @@ class Wallet {
    *
    * ### Example
    * ```js
-   * chainstack.cs.accounts.wallet.encrypt(password, encryptOptions)
+   * dipperin.cs.accounts.wallet.encrypt(password, encryptOptions)
    * // => [EncryptResult, ...]
    * ```
    *

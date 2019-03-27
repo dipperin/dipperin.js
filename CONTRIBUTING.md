@@ -1,14 +1,14 @@
 # Contributing
 
-If you're reading this, you're awesome! Thank you for helping us make this project great and being a part of the Chainstack community. Here are a few guidelines that will help you along the way.
+If you're reading this, you're awesome! Thank you for helping us make this project great and being a part of the Dipperin community. Here are a few guidelines that will help you along the way.
 
 ## Code of Conduct
 
-Please help us keep Chainstack.js open and inclusive by reading and following our [Code of Conduct](./CODE_OF_CONDUCT.md).
+Please help us keep Dipperin.js open and inclusive by reading and following our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Submitting a pull request
 
-Chainstack.js is a community project, so pull requests are always welcome, but, before working on a large change, it is best to open an issue first to discuss it with the maintainers.
+Dipperin.js is a community project, so pull requests are always welcome, but, before working on a large change, it is best to open an issue first to discuss it with the maintainers.
 
 When in doubt, keep your pull requests small. To give a PR the best chance of getting accepted, don't bundle more than one feature or bug fix per pull request. It's always best to create two smaller PRs than one big one.
 
@@ -31,8 +31,8 @@ Only important bug fixes should be applied to `master` at this point.
 
 Please create a new branch from the latest master branch on your own fork repository. (Note that urgent updates should be from the latest release instead of master.)
 
-1. Fork the Chainstack.js repository on Github
-2. Clone your fork to your local machine `git clone git@github.com:<yourname>/chainstack.js.git`
+1. Fork the Dipperin.js repository on Github
+2. Clone your fork to your local machine `git clone git@github.com:<yourname>/Dipperin.js.git`
 3. Create a branch `git checkout -b my-topic-branch`
 4. Make your changes, lint, then push to to GitHub with `git push --set-upstream origin my-topic-branch`
 5. Visit GitHub and make your pull request.
@@ -40,7 +40,7 @@ Please create a new branch from the latest master branch on your own fork reposi
 If you have an existing local repository, please update it before you start, to minimise the chance of merge conflicts.
 
 ```sh
-git remote add upstream git@github.com:caiqingfeng/chainstack.js.git
+git remote add upstream git@github.com:caiqingfeng/Dipperin.js.git
 git checkout master
 git pull upstream master
 git checkout -b my-topic-branch
@@ -51,20 +51,20 @@ yarn
 
 ### Security disclosures
 
-If you find a security vulnerability, do NOT open an issue. Email it@chainstack.io instead.
+If you find a security vulnerability, do NOT open an issue. Email it@dipperin.io instead.
 
 In order to determine whether you are dealing with a security issue, ask yourself these two questions:
 
 - Can I access something that's not mine, or something I shouldn't have access to?
 - Can I disable something for other people?
 
-If the answer to either of those two questions are "yes", then you're probably dealing with a security issue. Note that even if you answer "no" to both questions,you may still be dealing with a security issue, so if you're unsure, just email us at it@chainstack.io.
+If the answer to either of those two questions are "yes", then you're probably dealing with a security issue. Note that even if you answer "no" to both questions,you may still be dealing with a security issue, so if you're unsure, just email us at it@dipperin.io.
 
 ### How to file a bug report
 
 When filing an issue, make sure to answer these five questions:
 
-1. What version of Chainstack Wallet are you using (chainstack-wallet version)?
+1. What version of Dipperin Wallet are you using (Dipperin.js version)?
 2. What operating system and processor architecture are you using?
 3. What did you do?
 4. What did you expect to see?

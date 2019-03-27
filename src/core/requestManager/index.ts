@@ -142,7 +142,7 @@ class RequestManager {
     if (this.subscriptions.has(id)) {
       this.send(
         {
-          method: `chainstack_unsubscribe`,
+          method: `dipperin_unsubscribe`,
           params: [id]
         },
         callback

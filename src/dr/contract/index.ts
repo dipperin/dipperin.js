@@ -279,7 +279,7 @@ class Contract extends Core {
   ) => Promise<
     ReturnType<typeof Helper.Formatters.outputContractDetailFormatter>
   > = this.buildCall({
-    call: 'chainstack_getContract',
+    call: 'dipperin_getContract',
     name: 'getContractDetail',
     outputFormatter: Helper.Formatters.outputContractDetailFormatter,
     params: 1
@@ -340,7 +340,7 @@ class Contract extends Core {
     },
     cb: Callback
   ) => Promise<any> = this.buildCall({
-    call: 'chainstack_getContractInfo',
+    call: 'dipperin_getContractInfo',
     name: 'getContractInfo',
     inputFormatter: [Helper.Formatters.inputContractCallFormatter],
     params: 1

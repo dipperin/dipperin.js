@@ -5,7 +5,7 @@ import Contract from './contract'
 import Personal from './personal'
 import Wallet from './wallet'
 
-class CS extends Core {
+class DR extends Core {
   personal: Personal
   contract: Contract
   wallet: Wallet
@@ -27,7 +27,7 @@ class CS extends Core {
     address: string,
     cb?: Callback
   ) => Promise<string> = this.buildCall({
-    call: 'chainstack_currentBalance',
+    call: 'dipperin_currentBalance',
     name: 'getBalance',
     inputFormatter: [Helper.Formatters.inputAddressFormatter],
     outputFormatter: Helper.Formatters.outputBalanceFormatter,
@@ -38,7 +38,7 @@ class CS extends Core {
     address: string,
     cb?: Callback
   ) => Promise<string> = this.buildCall({
-    call: 'chainstack_getTransactionNonce',
+    call: 'dipperin_getTransactionNonce',
     name: 'getNonce',
     inputFormatter: [Helper.Formatters.inputAddressFormatter],
     outputFormatter: Helper.Formatters.outputNonceFormatter,
@@ -46,7 +46,7 @@ class CS extends Core {
   })
 
   getCurrentBlock: (cb?: Callback) => Promise<any> = this.buildCall({
-    call: 'chainstack_currentBlock',
+    call: 'dipperin_currentBlock',
     name: 'getCurrentBlock',
     params: 0
   })
@@ -55,7 +55,7 @@ class CS extends Core {
     hash: string,
     cb?: Callback
   ) => Promise<any> = this.buildCall({
-    call: 'chainstack_transaction',
+    call: 'dipperin_transaction',
     name: 'getTransaction',
     params: 1
   })
@@ -64,14 +64,14 @@ class CS extends Core {
     hash: string,
     cb?: Callback
   ) => Promise<string | { error: { message: string } }> = this.buildCall({
-    call: 'chainstack_newTransaction',
+    call: 'dipperin_newTransaction',
     inputFormatter: [Helper.Formatters.inputHashFormatter],
     name: 'sendSignedTransaction',
     params: 1
   })
 
   setMineCoinbase = this.buildCall({
-    call: 'chainstack_setMineCoinBase',
+    call: 'dipperin_setMineCoinBase',
     name: 'setMineCoinbase',
     params: 1
   })
@@ -82,4 +82,4 @@ class CS extends Core {
   })
 }
 
-export default CS
+export default DR

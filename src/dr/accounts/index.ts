@@ -137,7 +137,7 @@ class Accounts {
   static hashMessage(data): string {
     const message = Utils.isHexStrict(data) ? Utils.hexToBytes(data) : data
     const messageBuffer = Buffer.from(message)
-    const preamble = `\x19Chainstack Signed Message:\n${message.length}`
+    const preamble = `\x19Dipperin Signed Message:\n${message.length}`
     const preambleBuffer = Buffer.from(preamble)
     const ethMessage = Buffer.concat([preambleBuffer, messageBuffer])
     return Helper.Hash.keccak256(ethMessage)
@@ -234,7 +234,7 @@ class Accounts {
    */
   static recover(sig: object): string
 
-  static recover(...args): string {
+  static recover(...args: any[]): string {
     let msg = args[0]
     const signature = args[1]
     let prefixed = args[2]

@@ -4,9 +4,9 @@
 
 ### Bug Fixes
 
-* 🐛 Add npmrc and npmignore ([ffc87c1](https://github.com/caiqingfeng/chainstack.js/commit/ffc87c1))
-* 🐛 set contract provider ([fa748e0](https://github.com/caiqingfeng/chainstack.js/commit/fa748e0)), closes [#1](https://github.com/caiqingfeng/chainstack.js/issues/1)
-* 🐛 update api types ([b18ac8c](https://github.com/caiqingfeng/chainstack.js/commit/b18ac8c)), closes [#1](https://github.com/caiqingfeng/chainstack.js/issues/1)
+* 🐛 Add npmrc and npmignore ([ffc87c1](https://github.com/caiqingfeng/dipperin.js/commit/ffc87c1))
+* 🐛 set contract provider ([fa748e0](https://github.com/caiqingfeng/dipperin.js/commit/fa748e0)), closes [#1](https://github.com/caiqingfeng/dipperin.js/issues/1)
+* 🐛 update api types ([b18ac8c](https://github.com/caiqingfeng/dipperin.js/commit/b18ac8c)), closes [#1](https://github.com/caiqingfeng/dipperin.js/issues/1)
 
 
 

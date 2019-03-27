@@ -1,8 +1,8 @@
 {
-  "name": "@tchainstack/chainstack.js",
+  "name": "@dipperin/dipperin.js",
   "version": "0.4.35",
   "private": false,
-  "description": "chainstack javascript lib",
+  "description": "Dipperin javascript lib",
   "main": "build/main/index.js",
   "typings": "build/module/index.d.ts",
   "module": "build/module/index.js",
