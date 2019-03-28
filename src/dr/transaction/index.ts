@@ -108,11 +108,9 @@ class Transaction {
       rawByte += 67
     }
     if (this.transactionResult.txData.fee === '0') {
-      rawByte += 3
+      rawByte += 6
     }
     return (rawByte * 100).toString()
-    // TODO: 根据经济模型调整
-    // return '10000'
   }
 }
 

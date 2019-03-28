@@ -1,9 +1,9 @@
 import Contract from './index'
 import Helper from '../../helper'
 import Provider from '../../providers/httpProvider'
+import Transaction from '../transaction'
 const provider = new Provider('http://localhost:8888')
 
-// TODO
 // test('Contract/createContactCallTransaction', () => {
 //   const contract = new Contract(provider)
 
@@ -109,70 +109,73 @@ test('Contract/createContract', () => {
   )
 })
 
-// TODO
-// test('contract/createDeployContractTransaction', () => {
-//   const nonce = '1001'
-//   const value = '12000000'
-//   const chainId = '0x01'
-//   const fee = '1000'
-//   const hashLock = '0x00009328d55ccb3fce531f199382339f0e576ee840b1'
-//   const to = '0x00009328d55ccb3fce531f199382339f0e576ee840b1'
-//   const contractData = 'sss'
-//   const timeLock = 12
+test('Contract/createContract2', () => {
+  const options = {
+    owner: '0x00000224fa42f7315cd04d6774e58b54e92603e96d84',
+    tokenName: 'EOS',
+    tokenDecimals: 18,
+    tokenSymbol: 'EOS',
+    tokenTotalSupply: '1000000000000000000000000000'
+  }
+  // expect(Contract.createContract(options,'ERC20')).toEqual({
+  //     contractAddress: options.owner,
+  //     contractData: {
+  //         action: 'create',
+  //         ccontract_address: Account.genContractAddress()
+  //     }
+  // })
+  expect(
+    JSON.parse(Contract.createContract(options, 'ERC20').contractData).params
+  ).toBe(
+    JSON.stringify({
+      owner: options.owner,
+      token_name: 'EOS',
+      token_decimals: 18,
+      token_symbol: 'EOS',
+      token_total_supply: '0x33b2e3c9fd0803ce8000000',
+      balances: {
+        [options.owner]: '0x33b2e3c9fd0803ce8000000'
+      },
+      allowed: {}
+    })
+  )
+})
 
-//   const privateKey =
-//     '0x289c2857d4598e37fb9647507e47a309d6133539bf21a8b9cb6df88fd5232032'
+test('contract/createDeployContractTransaction', () => {
+  const nonce = '0'
+  const value = '0'
+  const fee = '10'
+  const to = '0x00009328d55ccb3fce531f199382339f0e576ee840b1'
 
-//   expect(
-//     Contract.createDeployContractTransaction(
-//       {
-//         nonce,
-//         value,
-//         fee,
-//         hashLock,
-//         to,
-//         extraData: contractData,
-//         timeLock
-//       },
+  const options = {
+    owner: '0x00000224fa42f7315cd04d6774e58b54e92603e96d84',
+    tokenName: 'EOS',
+    tokenDecimals: 18,
+    tokenSymbol: 'EOS',
+    tokenTotalSupply: '1000000000000000000000000000'
+  }
 
-//       privateKey,
-//       chainId
-//     ).tx.txData.nonce
-//   ).toBe(nonce)
+  const privateKey =
+    '0x289c2857d4598e37fb9647507e47a309d6133539bf21a8b9cb6df88fd5232032'
 
-//   expect(
-//     Contract.createDeployContractTransaction(
-//       {
-//         nonce,
-//         value,
-//         fee,
-//         hashLock,
-//         to,
-//         extraData: contractData,
-//         timeLock
-//       },
-//       privateKey,
-//       chainId
-//     ).tx.txData.fee
-//   ).toBe(fee)
+  const con = Contract.createContract(options, 'ERC20')
 
-//   expect(
-//     Contract.createDeployContractTransaction(
-//       {
-//         nonce,
-//         value,
-//         fee,
-//         hashLock,
-//         to,
-//         extraData: contractData,
-//         timeLock
-//       },
+  expect(con.contractData.length).toEqual(395)
 
-//       privateKey,
-//       chainId
-//     ).tx.txData.to
-//   ).toBe(to)
-// })
+  const dCon = new Transaction({
+    txData: {
+      nonce,
+      value,
+      fee,
+      to,
+      extraData: con.contractData
+    }
+  })
+
+  dCon.sign(privateKey)
+
+  expect(dCon.getFee()).toEqual('50200')
+})
 
 test('contract/checkContractOptions', () => {
   const options = {

@@ -12,7 +12,8 @@ import {
   sha3,
   toBN,
   utf8ToHex,
-  numberToHex
+  numberToHex,
+  decodeBase64
 } from './utils'
 
 test('utils/utils/isBN', () => {
@@ -151,4 +152,8 @@ test('utils/utils/isContractAddress', () => {
   expect(
     isContractAddress('0x0010c1912fee45d61c87cc5ea59dae31190fffff232d')
   ).toEqual(true)
+})
+
+test('utils/utils/decodeBase64', () => {
+  expect(decodeBase64('5rWL6K+V')).toEqual('测试')
 })

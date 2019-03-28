@@ -4,6 +4,7 @@ import Helper from '../helper'
 import {
   checkAddressChecksum,
   dechunk,
+  decodeBase64,
   hexToBase64,
   hexToBytes,
   hexToNumber,
@@ -115,6 +116,7 @@ export default {
   checkAddressChecksum,
   dechunk,
   fireError,
+  decodeBase64,
   hexToBase64,
   hexToBytes,
   hexToBuffer,

@@ -302,6 +302,14 @@ export const hexToBase64 = (hex: string): string => {
 }
 
 /**
+ * Should be called to get string from base64
+ * @param base base64 string
+ */
+export const decodeBase64 = (base: string): string => {
+  return Base64.decode(base)
+}
+
+/**
  * Converts value to it's decimal representation in string
  *
  * @param hex

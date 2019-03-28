@@ -6,8 +6,6 @@ import { Callback, Provider } from '../../providers'
 
 const CONTRACT_TYPE_ERC20 = 'ERC20'
 
-// FIXME: Now only support ERC20
-
 class Contract extends Core {
   constructor(provider: Provider | string) {
     super(provider)
@@ -63,20 +61,6 @@ class Contract extends Core {
       contractData: JSON.stringify(contractData),
       contractAddress: validContractAddress
     }
-  }
-
-  /**
-   * Create contract deploy transaction
-   *
-   * @param transactionResult TransactionResult
-   * @param privateKey
-   */
-  static createDeployContractTransaction(
-    transactionData: TransactionData,
-    privateKey: string,
-    chainId?: string
-  ): SignedTransactionResult {
-    return Accounts.signTransaction(transactionData, privateKey, chainId)
   }
 
   /**
