@@ -315,7 +315,7 @@ export const decodeBase64 = (base: string): string => {
  * @param hex
  */
 export const hexToNumberString = (hex: string) => {
-  return hex ? toBN(hex).toString(10) : hex
+  return hex ? (hex === '0x' ? '0' : toBN(hex).toString(10)) : hex
 }
 
 /**

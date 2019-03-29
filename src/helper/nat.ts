@@ -1,6 +1,8 @@
 import BN from 'bignumber.js'
 import Bytes from './bytes'
 
+const cutZero = (nat: string) => fromString(fromBN(toBN(nat)))
+
 const fromBN = (bn: BN): string => `0x${bn.toString(16)}`
 
 const toBN = (str: string): BN => new BN(str.slice(2), 16)
@@ -40,6 +42,7 @@ const sub = bin('sub')
 
 export default {
   add,
+  cutZero,
   div,
   fromBN,
   fromNumber,

@@ -28,7 +28,7 @@ export const signTransaction = (
 export const getChainId = (v: string): string =>
   `0x${Math.round((Nat.toNumber(v) - ADD_TO_VALUE) / 2)}`
 
-export const hashRlpTx = tx => Hash.keccak256(rlpTx(tx))
+export const hashRlpTx = (tx: TransactionInput) => Hash.keccak256(rlpTx(tx))
 
 export const rlpTx = (transactionInput: TransactionInput): string => {
   const { txData, chainId } = transactionInput
@@ -61,7 +61,9 @@ export const rlpSignedTx = (transactionResult: TransactionResult): string => {
       Utils.formatNumberToHex(fee),
       Utils.formatUtf8ToHex(extraData)
     ],
-    [r, s, v, hashKey].map(item => Bytes.fromNat(item))
+    [r, s, v, hashKey].map(item =>
+      Bytes.fromNat(item ? Nat.cutZero(item) : item)
+    )
   ])
 }
 

@@ -41,6 +41,26 @@ const transactionResult2 = {
   }
 }
 
+// pk 0xcb0360d1678e7fdcb04e1347ab4f1d06fe2fac353ad41a60c4a552496296f9ae
+const transactionResult3 = {
+  txData: {
+    nonce: '20',
+    to: '0x00001B0e12d3b39F606f2B83d5c78d2C3A41A9CC91CF',
+    hashLock: '0x',
+    timeLock: 0,
+    value: '2400000000',
+    fee: '11300',
+    extraData: '',
+    from: '0x0000b4293d60f051936bedecfae1b85d5a46d377af37'
+  },
+  witness: {
+    r: '0xf38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a16',
+    s: '0x009b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa5',
+    v: '0x39',
+    hashKey: '0x'
+  }
+}
+
 describe('cs/transaction', () => {
   it('serialize', () => {
     const tx = new Transaction(transactionResult)
@@ -52,6 +72,14 @@ describe('cs/transaction', () => {
     tx2.sign(pk2, '0x03')
     expect(tx2.serialize()).toBe(
       '0xf89ff857019600014059a38f1e42bd9a415f4578cd6f347112951d8da064e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab010782870482271064960000970e8128ab834e8eac17ab8e3812f010678cf791f844a01c2b9a65ba8bb0d5bd7b07655a909ecd2b17ff6c1a88c0a25051d155219457bfa05cbbc90b74bb7e0a3f6d80df57674fb60d4a6325a30fb031ab33f03f463fa3a93c80'
+    )
+
+    const tx3 = new Transaction(transactionResult3)
+    tx3.sign(
+      '0xcb0360d1678e7fdcb04e1347ab4f1d06fe2fac353ad41a60c4a552496296f9ae'
+    )
+    expect(tx3.serialize()).toBe(
+      '0xf869e3149600001B0e12d3b39F606f2B83d5c78d2C3A41A9CC91CF8080848f0d1800822c2480f843a0f38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a169f9b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa53980'
     )
   })
   it('unserialize', () => {
@@ -84,20 +112,38 @@ describe('cs/transaction', () => {
     expect(unSerializeTx2.transactionResult.txData.to).toEqual(
       '0x00014059a38f1e42bd9a415f4578cd6f347112951d8d'
     )
+
+    // const unSerializeTx3 = Transaction.unserialize(
+    //   "0xf86ae3149600001B0e12d3b39F606f2B83d5c78d2C3A41A9CC91CF8080848f0d1800822c2480f844a0f38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a16a0009b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa53980"
+    // )
+    // console.log(unSerializeTx3)
   })
-  // TODO
-  // it('getTxHash', () => {
-  //   const tx = new Transaction(transactionResult)
-  //   tx.sign(pk1)
-  //   expect(tx.getTxHash()).toBe(
-  //     '0x528131488f97c6314b2fa0dff404f1037067e787b65cb244d79c7ecea007c0d5'
-  //   )
-  //   const tx2 = new Transaction(transactionResult2)
-  //   tx2.sign(pk2, '0x03')
-  //   expect(tx2.getTxHash()).toBe(
-  //     '0x0aedd7a6779339cc44fe1e51cdf42b4bf3a557d52e646390e6d6bf6d489a5de3'
-  //   )
-  // })
+
+  // f869e31496
+  // 00001b0e12d3b39f606f2b83d5c78d2c3a41a9cc91cf
+  // 80
+  // 80
+  // 84 8f0d1800
+  // 82 2c24
+  // 80
+  // f843a0
+  // f38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a16
+  // 9f
+  // 9b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa539
+  // 80
+  // f86ae31496
+  // 00001B0e12d3b39F606f2B83d5c78d2C3A41A9CC91CF
+  // 80
+  // 80
+  // 84 8f0d1800
+  // 822c24
+  // 80
+  // f844a0
+  // f38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a16
+  // a0
+  // 009b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa5
+  // 39
+  // 80
 
   it('recover', () => {
     const unSerializeTx = Transaction.unserialize(

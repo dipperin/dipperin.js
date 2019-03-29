@@ -32,3 +32,11 @@ test('lib/nat/toUint256', () => {
 test('lib/nat/toString', () => {
   expect(nat.toString('0x12')).toBe('18')
 })
+
+test('lib/nat/cutZero', () => {
+  expect(
+    nat.cutZero(
+      '0x009b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa5'
+    )
+  ).toEqual('0x9b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa5')
+})
