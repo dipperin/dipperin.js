@@ -1,0 +1,12 @@
+src
+publish.sh
+run_jenkins_test.sh
+.vscode
+package-lock.json
+yarn.lock
+tsconfig.json
+tsconfig.watch.json
+tsconfig.build.json
+webpack.config.js
+test.js
+.awcache

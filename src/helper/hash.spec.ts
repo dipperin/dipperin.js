@@ -1,0 +1,35 @@
+import hash from './hash'
+
+test('lib/hash/keccak256', () => {
+  expect(hash.keccak256('123')).toBe(
+    '0x64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107'
+  )
+  expect(hash.keccak256('abc')).toBe(
+    '0x4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45'
+  )
+  expect(hash.keccak256('0x4bc2')).toBe(
+    '0x2a17472364b63d2c0f7168ee0bd00d152710568efc985858bdafdfd7385b185c'
+  )
+  expect(
+    hash.keccak256(
+      '0x4bc2a31265153f07e70e0bab08724e6b85e217f8cd628ceb62974247bb493382ce28cab79ad7119ee1ad3ebcdb98a16805211530ecc6cfefa1b88e6dff99232a'
+    )
+  ).toBe('0x9cead80a9d0a0951cdbf966b9d8a62f656a8d1615c1294fd71e9cfb3e4855a4f')
+
+  expect(
+    hash.keccak256(
+      '0xf866df0a960000000000000000000000012132143242353453453480808227100a80f844a0f1bd5e6ffe6d3d1b78f7dc58a5e922229a5eba863e8d2dfa8e2e4df52837d2e4a0245a507467fb8e02001e61bb888b713c9cff16d3f2b798d62f5228f58eef961e3880'
+    )
+  ).toEqual(
+    '0x3bf6405952560effb256fe297efdd6ad379da5eac8fb84ba87a7c9841793619d'
+  )
+})
+
+test('lib/hash/keccak512', () => {
+  expect(hash.keccak512('123')).toBe(
+    '0x8ca32d950873fd2b5b34a7d79c4a294b2fd805abe3261beb04fab61a3b4b75609afd6478aa8d34e03f262d68bb09a2ba9d655e228c96723b2854838a6e613b9d'
+  )
+  expect(hash.keccak512('abc')).toBe(
+    '0x18587dc2ea106b9a1563e32b3312421ca164c7f1f07bc922a9c83d77cea3a1e5d0c69910739025372dc14ac9642629379540c17e2a65b19d77aa511a9d00bb96'
+  )
+})
