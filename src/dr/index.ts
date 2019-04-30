@@ -34,6 +34,17 @@ class DR extends Core {
     params: 1
   })
 
+  getLockedMoney: (
+    address: string,
+    cb?: Callback
+  ) => Promise<string> = this.buildCall({
+    call: 'dipperin_getAddressLockMoney',
+    name: 'getAddressLockedMonery',
+    inputFormatter: [Helper.Formatters.inputAddressFormatter],
+    outputFormatter: Helper.Formatters.outputBalanceFormatter,
+    params: 1
+  })
+
   getNonce: (
     address: string,
     cb?: Callback
