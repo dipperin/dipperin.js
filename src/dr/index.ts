@@ -41,7 +41,7 @@ class DR extends Core {
     call: 'dipperin_getAddressLockMoney',
     name: 'getAddressLockedMonery',
     inputFormatter: [Helper.Formatters.inputAddressFormatter],
-    outputFormatter: Helper.Formatters.outputBalanceFormatter,
+    outputFormatter: Helper.Formatters.outputLockMoneyFormatter,
     params: 1
   })
 
