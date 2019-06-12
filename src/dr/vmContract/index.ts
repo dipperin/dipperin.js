@@ -1,8 +1,9 @@
+import _ from 'lodash'
 import Core from '../../core'
-import { Provider } from '../../providers'
+import { Provider, Callback } from '../../providers'
 import rlp from '../../helper/rlp'
 import { SignedTransactionResult } from '../../helper'
-import { Accounts } from '../..'
+import { Accounts, Utils } from '../..'
 
 const VmContractAddress = '0x00120000000000000000000000000000000000000000'
 
@@ -16,7 +17,16 @@ class VmContract extends Core {
     abiBytes: string,
     ...initParams: any[]
   ): string {
-    return rlp.encode([wasmBytes, abiBytes, ...initParams])
+    return rlp.encode([
+      wasmBytes,
+      abiBytes,
+      ...initParams.map(
+        param =>
+          _.isNumber(param)
+            ? Utils.formatNumberToHex(param)
+            : Utils.formatUtf8ToHex(param)
+      )
+    ])
   }
 
   static createDeployTransaction(
@@ -41,6 +51,51 @@ class VmContract extends Core {
       chainId
     )
   }
+
+  static createCallMethod(funcName: string, ...params: any[]): string {
+    return rlp.encode([
+      Utils.formatUtf8ToHex(funcName),
+      ...params.map(
+        param =>
+          _.isNumber(param)
+            ? Utils.formatNumberToHex(param)
+            : Utils.formatUtf8ToHex(param)
+      )
+    ])
+  }
+
+  static createCallMethodTransaction(
+    contractAddress: string,
+    nonce: string,
+    gas: string,
+    gasPrice: string,
+    value: string,
+    methodData: string,
+    privateKey: string,
+    chainId?: string
+  ): SignedTransactionResult {
+    return Accounts.signTransaction(
+      {
+        nonce,
+        gas,
+        gasPrice,
+        value,
+        extraData: methodData,
+        to: contractAddress
+      },
+      privateKey,
+      chainId
+    )
+  }
+
+  getContractByHash: (
+    hash: string,
+    cb?: Callback
+  ) => Promise<string> = this.buildCall({
+    call: 'dipperin_getContractAddressByTxHash',
+    name: 'getVmContractByHash',
+    params: 1
+  })
 }
 
 export default VmContract
