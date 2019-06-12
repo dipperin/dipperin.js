@@ -50,12 +50,15 @@ class Transaction {
       privateKey,
       chainId
     )
+
     this.transactionResult.witness = {
       r: sig[1],
       s: sig[2],
       v: sig[0],
       hashKey: null
     }
+
+    this.transactionResult.txData.from = Helper.Account.fromPrivate(privateKey)
   }
 
   /**
