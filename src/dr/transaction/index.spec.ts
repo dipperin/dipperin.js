@@ -113,7 +113,6 @@ describe('cs/transaction', () => {
     expect(unSerializeTx2.transactionResult.txData.to).toEqual(
       '0x00014059a38f1e42bd9a415f4578cd6f347112951d8d'
     )
-
     // const unSerializeTx3 = Transaction.unserialize(
     //   "0xf86ae3149600001B0e12d3b39F606f2B83d5c78d2C3A41A9CC91CF8080848f0d1800822c2480f844a0f38ee355b1d6ba0b31460f1855e3d23d83c0b67d6f160bc0d76bcd5a6f409a16a0009b7959883631476114a680a6eafc8bcff53bc66a9d1a75b2b34aff2ba8efa53980"
     // )

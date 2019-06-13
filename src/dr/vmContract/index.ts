@@ -29,6 +29,22 @@ class VmContract extends Core {
     ])
   }
 
+  static decodeVmContract(
+    rlpData: string
+  ): {
+    wasmBytes: string
+    abiBytes: string
+    params: any[]
+  } {
+    const data = rlp.decode(rlpData) as any[]
+    const [wasmBytes, abiBytes, ...params] = data
+    return {
+      wasmBytes,
+      abiBytes,
+      params
+    }
+  }
+
   static createDeployTransaction(
     nonce: string,
     gas: string,
