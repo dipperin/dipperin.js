@@ -174,7 +174,7 @@ test('contract/createDeployContractTransaction', () => {
 
   dCon.sign(privateKey)
 
-  expect(dCon.getFee()).toEqual('50400')
+  expect(dCon.getFee()).toEqual('50200')
 })
 
 test('contract/checkContractOptions', () => {

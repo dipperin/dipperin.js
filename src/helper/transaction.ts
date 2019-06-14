@@ -32,17 +32,7 @@ export const hashRlpTx = (tx: TransactionInput) => Hash.keccak256(rlpTx(tx))
 
 export const rlpTx = (transactionInput: TransactionInput): string => {
   const { txData, chainId } = transactionInput
-  const {
-    nonce,
-    to,
-    hashLock,
-    timeLock,
-    value,
-    fee,
-    extraData,
-    gas,
-    gasPrice
-  } = txData
+  const { nonce, to, hashLock, timeLock, value, fee, extraData } = txData
   return Rlp.encode([
     [
       Utils.formatNumberToHex(nonce),
@@ -51,8 +41,6 @@ export const rlpTx = (transactionInput: TransactionInput): string => {
       Utils.formatNumberToHex(timeLock),
       Utils.formatNumberToHex(value),
       Utils.formatNumberToHex(fee),
-      Utils.formatNumberToHex(gasPrice),
-      Utils.formatNumberToHex(gas),
       Utils.formatUtf8ToHex(extraData)
     ],
     Utils.formatNumberToHex(chainId)
@@ -61,17 +49,7 @@ export const rlpTx = (transactionInput: TransactionInput): string => {
 
 export const rlpSignedTx = (transactionResult: TransactionResult): string => {
   const { txData, witness } = transactionResult
-  const {
-    nonce,
-    to,
-    hashLock,
-    timeLock,
-    value,
-    fee,
-    extraData,
-    gas,
-    gasPrice
-  } = txData
+  const { nonce, to, hashLock, timeLock, value, fee, extraData } = txData
   const { r, s, v, hashKey } = witness
   return Rlp.encode([
     [
@@ -81,8 +59,6 @@ export const rlpSignedTx = (transactionResult: TransactionResult): string => {
       Utils.formatNumberToHex(timeLock),
       Utils.formatNumberToHex(value),
       Utils.formatNumberToHex(fee),
-      Utils.formatNumberToHex(gasPrice),
-      Utils.formatNumberToHex(gas),
       Utils.formatUtf8ToHex(extraData)
     ],
     [r, s, v, hashKey].map(item =>
@@ -94,7 +70,7 @@ export const rlpSignedTx = (transactionResult: TransactionResult): string => {
 export const getTransactionFromRaw = (raw: string): TransactionResult => {
   const tx = Rlp.decode(raw) as any[]
   const [
-    [nonce, to, hashLock, timeLock, value, fee, gas, gasPrice, extraData],
+    [nonce, to, hashLock, timeLock, value, fee, extraData],
     [r, s, v, hashKey]
   ] = tx
   return {
@@ -105,8 +81,6 @@ export const getTransactionFromRaw = (raw: string): TransactionResult => {
       timeLock: Utils.hexToNumber(timeLock),
       value: Utils.hexToNumberString(value),
       fee: Utils.hexToNumberString(fee),
-      gasPrice: Utils.hexToNumberString(gasPrice),
-      gas: Utils.hexToNumberString(gas),
       extraData: Utils.hexToUtf8(extraData)
     },
     witness: {
@@ -126,8 +100,6 @@ export const getTransactionId = (transactionData: TransactionData): string => {
     timeLock,
     value,
     fee,
-    gas,
-    gasPrice,
     extraData,
     from
   } = transactionData
@@ -140,8 +112,6 @@ export const getTransactionId = (transactionData: TransactionData): string => {
         Utils.formatNumberToHex(timeLock),
         Utils.formatNumberToHex(value),
         Utils.formatNumberToHex(fee),
-        Utils.formatNumberToHex(gasPrice),
-        Utils.formatNumberToHex(gas),
         Utils.formatUtf8ToHex(extraData)
       ],
       from
@@ -159,10 +129,8 @@ export interface Witness {
 export interface TransactionData {
   nonce: string
   value: string
+  fee: string
   to: string
-  gas?: string
-  gasPrice?: string
-  fee?: string
   hashLock?: string
   extraData?: string
   timeLock?: number
