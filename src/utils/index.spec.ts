@@ -34,3 +34,10 @@ test('Utils/toUnit', () => {
   expect(Utils.toUnit('1', 'thousands')).toEqual('1000')
   expect(Utils.toUnit('1', 'units')).toEqual('1')
 })
+
+test('Utils/toUnit', () => {
+  expect(Utils.typeStringToBytes('123', 'int32')).toEqual('0x0000007b')
+  expect(Utils.typeStringToBytes('123', 'int64')).toEqual('0x000000000000007b')
+  expect(Utils.typeStringToBytes('dipp', 'string')).toEqual('0x64697070')
+  // expect(Utils.typeStringToBytes('12345.3', 'float32')).toEqual('0x33e54046')
+})

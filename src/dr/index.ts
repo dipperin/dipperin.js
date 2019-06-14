@@ -4,15 +4,18 @@ import { Callback, Provider } from '../providers'
 import Contract from './contract'
 import Personal from './personal'
 import Wallet from './wallet'
+import VmContract from './vmContract'
 
 class DR extends Core {
   personal: Personal
   contract: Contract
+  vmContract: VmContract
   wallet: Wallet
   constructor(provider: string | Provider) {
     super(provider)
 
     this.contract = new Contract(provider)
+    this.vmContract = new VmContract(provider)
     this.personal = new Personal(provider)
     this.wallet = new Wallet()
   }
@@ -21,6 +24,7 @@ class DR extends Core {
     super.setProvider(provider)
     this.personal.setProvider(provider)
     this.contract.setProvider(provider)
+    this.vmContract.setProvider(provider)
   }
 
   getBalance: (
