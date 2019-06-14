@@ -5,7 +5,7 @@ import { Provider } from './providers'
 import Utils from './utils'
 
 class Dipperin extends Package {
-  utils: typeof Utils
+  utils: any
   dr: DR
   net: Net
 
