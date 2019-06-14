@@ -116,7 +116,16 @@ class VmContract extends Core {
     cb?: Callback
   ) => Promise<string> = this.buildCall({
     call: 'dipperin_getContractAddressByTxHash',
-    name: 'getVmContractByHash',
+    name: 'getContractByHash',
+    params: 1
+  })
+
+  getReceiptByTxHash: (
+    hash: string,
+    cb?: Callback
+  ) => Promise<any> = this.buildCall({
+    call: 'dipperin_getConvertReceiptByTxHash',
+    name: 'getReceiptByTxHash',
     params: 1
   })
 }
