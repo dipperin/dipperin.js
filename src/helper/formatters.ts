@@ -13,7 +13,7 @@ export const inputContractCallFormatter = (options: {
   }
 }
 
-export const inputAddressFormatter =  (address: string): string => {
+export const inputAddressFormatter = (address: string): string => {
   if (Utils.isAddress(address)) {
     if (address.includes('0x')) {
       return address
@@ -45,6 +45,10 @@ export const inputPlaceholderFormatter = <T>(arg: T): T => {
 
 export const outputBalanceFormatter = (output): string => {
   return Utils.hexToNumberString(output.balance)
+}
+
+export const outputLockMoneyFormatter = (output): string => {
+  return Utils.hexToNumberString(output)
 }
 
 export const outputNonceFormatter = (output): string =>
@@ -92,6 +96,7 @@ export default {
   inputPlaceholderFormatter,
   inputContractCallFormatter,
   outputBalanceFormatter,
+  outputLockMoneyFormatter,
   outputNonceFormatter,
   outputContractDetailFormatter
 }

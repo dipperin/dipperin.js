@@ -15,13 +15,13 @@ test('Utils/getUnit', () => {
   expect(Utils.getUnit('units')).toEqual('1')
   expect(Utils.getUnit('thousands')).toEqual('1000')
   expect(Utils.getUnit('millions')).toEqual('1000000')
-  expect(Utils.getUnit('csk')).toEqual('1000000000')
+  expect(Utils.getUnit('dip')).toEqual('1000000000')
   expect(Utils.getUnit('')).toEqual(undefined)
 })
 
 test('Utils/fromUnit', () => {
   expect(Utils.fromUnit('1000000000')).toEqual('1')
-  expect(Utils.fromUnit('1000000000', 'csk')).toEqual('1')
+  expect(Utils.fromUnit('1000000000', 'dip')).toEqual('1')
   expect(Utils.fromUnit('100000000', 'millions')).toEqual('100')
   expect(Utils.fromUnit('100000000', 'thousands')).toEqual('100000')
   expect(Utils.fromUnit('100000000', 'units')).toEqual('100000000')
@@ -29,7 +29,7 @@ test('Utils/fromUnit', () => {
 
 test('Utils/toUnit', () => {
   expect(Utils.toUnit('1')).toEqual('1000000000')
-  expect(Utils.toUnit('1', 'csk')).toEqual('1000000000')
+  expect(Utils.toUnit('1', 'dip')).toEqual('1000000000')
   expect(Utils.toUnit('1', 'millions')).toEqual('1000000')
   expect(Utils.toUnit('1', 'thousands')).toEqual('1000')
   expect(Utils.toUnit('1', 'units')).toEqual('1')

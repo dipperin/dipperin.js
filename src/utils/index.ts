@@ -77,7 +77,7 @@ export const unitMap = {
   thousands: '1000',
   millions: '1000000',
   billions: '1000000000',
-  csk: '1000000000'
+  dip: '1000000000'
 }
 
 export const getUnit = (unitType: string): string => {
@@ -93,7 +93,7 @@ export const fromUnit = (
   }
 
   const bn = toBN(num)
-  const unit = getUnit(unitType) || unitMap.csk
+  const unit = getUnit(unitType) || unitMap.dip
 
   return bn.div(unit).toString(10)
 }
@@ -107,7 +107,7 @@ export const toUnit = (
   }
 
   const bn = toBN(num)
-  const unit = getUnit(unitType) || unitMap.csk
+  const unit = getUnit(unitType) || unitMap.dip
 
   return bn.times(unit).toString(10)
 }
