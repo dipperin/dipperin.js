@@ -110,9 +110,9 @@ class Transaction {
     if (!this.transactionResult.witness.r) {
       rawByte += 67
     }
-    if (this.transactionResult.txData.fee === '0') {
-      rawByte += 6
-    }
+    // if (this.transactionResult.txData.fee === '0') {
+    //   rawByte += 6
+    // }
     return (rawByte * 100).toString()
   }
 }
