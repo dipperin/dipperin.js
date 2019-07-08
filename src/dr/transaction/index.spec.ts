@@ -89,7 +89,7 @@ describe('cs/transaction', () => {
     )
     expect(unSerializeTx.transactionResult.txData.value).toEqual('10000')
     expect(unSerializeTx.transactionResult.txData.extraData).toEqual('')
-    expect(unSerializeTx.transactionResult.txData.fee).toEqual('10')
+    // expect(unSerializeTx.transactionResult.txData.fee).toEqual('10')
     expect(unSerializeTx.transactionResult.txData.hashLock).toEqual('0x')
     expect(unSerializeTx.transactionResult.txData.nonce).toEqual('10')
     expect(unSerializeTx.transactionResult.txData.timeLock).toEqual(0)
@@ -104,7 +104,7 @@ describe('cs/transaction', () => {
     expect(unSerializeTx2.transactionResult.txData.extraData).toEqual(
       '0x0000970e8128ab834e8eac17ab8e3812f010678cf791'
     )
-    expect(unSerializeTx2.transactionResult.txData.fee).toEqual('100')
+    // expect(unSerializeTx2.transactionResult.txData.fee).toEqual('100')
     expect(unSerializeTx2.transactionResult.txData.hashLock).toEqual(
       '0x64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107'
     )
