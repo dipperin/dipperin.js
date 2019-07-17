@@ -1,3 +1,5 @@
+import BN from 'bignumber.js'
+
 /**
  * Get the byte at the specified position in bytes
  *
@@ -106,6 +108,15 @@ const fromNumber = (num: number): string =>
   `0x${num.toString(16).padStart(2, '0')}`
 
 /**
+ * Return bytes string from number string
+ *
+ * @param num
+ */
+const fromNumberString = (str: string): string => {
+  return `0x${new BN(str).toString(16).padStart(2, '0')}`
+}
+
+/**
  * return bytes number from bytes string
  *
  * @param bytes
@@ -194,6 +205,7 @@ export default {
   fromAscii,
   fromNat,
   fromNumber,
+  fromNumberString,
   fromString,
   fromUint8Array,
   length,
