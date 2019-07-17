@@ -5,7 +5,7 @@ import { Provider } from './providers'
 import Utils from './utils'
 
 class Dipperin extends Package {
-  utils: any
+  utils: typeof Utils
   dr: DR
   net: Net
 
@@ -29,6 +29,7 @@ export { default as Utils } from './utils'
 export { default as Accounts } from './dr/accounts'
 export { default as Transaction } from './dr/transaction'
 export { default as Contract } from './dr/contract'
+export { default as VmContract } from './dr/vmContract'
 export { default as Wallet } from './dr/wallet'
 export { default as net } from './net'
 export { default as helper } from './helper'
