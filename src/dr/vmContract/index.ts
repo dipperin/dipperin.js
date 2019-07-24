@@ -128,6 +128,17 @@ class VmContract extends Core {
     name: 'getReceiptByTxHash',
     params: 1
   })
+
+  constantCallContract: (
+    from: string,
+    to: string,
+    data: string,
+    blockNum: number
+  ) => Promise<any> = this.buildCall({
+    call: 'dipperin_callContract',
+    name: 'constantCallContract',
+    params: 4
+  })
 }
 
 interface ABI {
