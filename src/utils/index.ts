@@ -94,7 +94,8 @@ export const unitMap = {
   thousands: '1000',
   millions: '1000000',
   billions: '1000000000',
-  dip: '1000000000'
+  // dip: '1000000000'
+  dip: '1000000000000000000'
 }
 
 export const getUnit = (unitType: string): string => {
