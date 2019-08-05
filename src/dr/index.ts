@@ -116,6 +116,18 @@ class DR extends Core {
     name: 'estimateGas',
     params: 1
   })
+
+  getAbi: (
+    address: string,
+    cb?: Callback
+  ) => Promise<
+    { abiArr: any[] } | { error: { message: string } }
+  > = this.buildCall({
+    call: 'dipperin_getABI',
+    inputFormatter: [Helper.Formatters.inputAddressFormatter],
+    name: 'getABI',
+    params: 1
+  })
 }
 
 export default DR
