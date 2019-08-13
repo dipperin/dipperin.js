@@ -139,6 +139,18 @@ class VmContract extends Core {
     name: 'constantCallContract',
     params: 4
   })
+
+  getLogs: (
+    blockHash: string,
+    fromBlock: number,
+    toBlock: number,
+    addresses: string[],
+    topics: string[][]
+  ) => Promise<any> = this.buildCall({
+    call: 'dipperin_getLogs',
+    name: 'constantCallContract',
+    params: 5
+  })
 }
 
 interface ABI {
