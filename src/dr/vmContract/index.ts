@@ -124,7 +124,7 @@ class VmContract extends Core {
     hash: string,
     cb?: Callback
   ) => Promise<any> = this.buildCall({
-    call: 'dipperin_getConvertReceiptByTxHash',
+    call: 'dipperin_getReceiptByTxHash',
     name: 'getReceiptByTxHash',
     params: 1
   })
