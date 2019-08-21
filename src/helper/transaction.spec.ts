@@ -42,7 +42,7 @@ describe('helper/transaction', () => {
         chainId: '0x01'
       })
     ).toEqual(
-      '0xf869e280960000970e8128ab834e8eac17ab8e3812f010678cf79180808227100182a41080f844a08c0d481c73a35ff2e18b3ca85a105502a181ee17dcb6970d80c9d2aecb0ae599a052926c71f46d3d9c98fb2003ee1d1d756a75d7ef4b07436e1fea8f41e607b5213980'
+      '0xe4e280960000970e8128ab834e8eac17ab8e3812f010678cf79180808227108082a4108001'
     )
 
     // expect(
@@ -62,7 +62,7 @@ describe('helper/transaction', () => {
         chainId: '0x01'
       })
     ).toEqual(
-      '0x40d02d17c38fa19dfb99aafbc41ae25307a5dfe6bcadad4760fcbdc275cdaf93'
+      '0x16e83a2b5eb48a411d5f44c01a065b8ad8aa47233b8a57ea2f1e8a15a4887dd3'
     )
 
     // expect(
@@ -77,9 +77,9 @@ describe('helper/transaction', () => {
 
   it('signTransaction', () => {
     expect(transaction.signTransaction(txData1, pk1, '0x01')).toEqual([
-      '0x38',
-      '0x76c8923c4dfba0a112c7a0db4cb5808a9acb60f4165727d0dcf607793178bb37',
-      '0x0895879ed65610cb24db50bd727096c59e9abea2b60b5d747fadf4124c334cd9'
+      '0x39',
+      '0x2896da11a487eee30dfd0af7064908e5522f70f139c11b787d87212c15bf126c',
+      '0x16650a1349c079fd4704b28359096bd0028c268758608f55478f8ec376ab462a'
     ])
     // expect(transaction.signTransaction(txData2, pk2, '0x03')).toEqual([
     //   '0x3c',
@@ -100,7 +100,7 @@ describe('helper/transaction', () => {
       value: '100000000000000'
     }
     expect(transaction.getTransactionId(data)).toBe(
-      '0x076f135dd359ecac58c5314942385520a6736eba95338517f9c1a9a4d1bb13c3'
+      '0xb680d837ed5bfa851b686eee3df4e281a19fcbcdc76f4cef9a3d3e8dca9b861a'
     )
   })
 })
