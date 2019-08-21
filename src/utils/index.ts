@@ -1,5 +1,6 @@
 import BN from 'bignumber.js'
 import { isString, isFunction, isUndefined, isNumber } from 'lodash'
+// import { Parser } from 'binary-parser'
 import Helper from '../helper'
 import {
   checkAddressChecksum,
@@ -25,6 +26,22 @@ import {
   formatUtf8ToHex
 } from './utils'
 import { Callback } from '../providers'
+import bytes from '../helper/bytes'
+
+export const typeStringToBytes = (str: string, type: string) => {
+  switch (type) {
+    case 'int32':
+    case 'uint32':
+    case 'uint':
+    case 'int':
+      return bytes.pad(4, bytes.fromNumberString(str))
+    case 'int64':
+    case 'uint64':
+      return bytes.pad(8, bytes.fromNumberString(str))
+    default:
+      return bytes.fromString(str)
+  }
+}
 
 export const fireError = (
   error: Error,
@@ -77,7 +94,8 @@ export const unitMap = {
   thousands: '1000',
   millions: '1000000',
   billions: '1000000000',
-  dip: '1000000000'
+  // dip: '1000000000'
+  dip: '1000000000000000000'
 }
 
 export const getUnit = (unitType: string): string => {
@@ -139,5 +157,6 @@ export default {
   toUnit,
   getUnit,
   formatNumberToHex,
-  formatUtf8ToHex
+  formatUtf8ToHex,
+  typeStringToBytes
 }

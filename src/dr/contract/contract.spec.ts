@@ -144,7 +144,7 @@ test('Contract/createContract2', () => {
 test('contract/createDeployContractTransaction', () => {
   const nonce = '0'
   const value = '0'
-  const fee = '10'
+  // const fee = '10'
   const to = '0x00009328d55ccb3fce531f199382339f0e576ee840b1'
 
   const options = {
@@ -166,7 +166,7 @@ test('contract/createDeployContractTransaction', () => {
     txData: {
       nonce,
       value,
-      fee,
+      // fee,
       to,
       extraData: con.contractData
     }
@@ -174,7 +174,7 @@ test('contract/createDeployContractTransaction', () => {
 
   dCon.sign(privateKey)
 
-  expect(dCon.getFee()).toEqual('50200')
+  expect(dCon.getFee()).toEqual('50300')
 })
 
 test('contract/checkContractOptions', () => {

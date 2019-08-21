@@ -240,6 +240,25 @@ test('cs/accounts/decrypt', () => {
   expect(decryptResult.seed).toBe(seed)
 })
 
+// test('test/recover', () => {
+//   const item = {
+//     address: "0x000085E15e074806F1d123a2Bd925D2c60D627Fd8b2e",
+//     extraData: "0x66726f6d20646970706572696e2077616c6c657420657874656e73696f6e",
+//     v: "0x38",
+//     r: "0xfb2af08c272ee80a08f060479683d69386f1e890b3dda1353b8f846bbd8de47f",
+//     s: "0x422fb41bb29be282769eb8da990ba565d3979ea0a49d6ad09c0d94b964bbe9c6",
+//   }
+//   expect(
+//     Accounts.recover(
+//       item.extraData,
+//       item.v,
+//       item.r,
+//       item.s,
+//       true
+//     )
+//   ).toEqual(item.address)
+// })
+
 // test('cs/accounts/signTransaction', () => {
 //   const transactionData = {
 //     nonce: '0x0a',
