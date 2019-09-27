@@ -43,6 +43,12 @@ export const typeStringToBytes = (str: string, type: string) => {
   }
 }
 
+/**
+ * handles the error
+ * @param error
+ * @param reject
+ * @param callback
+ */
 export const fireError = (
   error: Error,
   reject: PromiseRejectionEvent,
@@ -63,7 +69,11 @@ export const fireError = (
   }
 }
 
-export const toChecksumAddress = (address: string) => {
+/**
+ * sha3 the address
+ * @param address
+ */
+export const toChecksumAddress = (address: string): string => {
   let addrs = address
   if (isUndefined(address)) {
     return ''
@@ -98,10 +108,19 @@ export const unitMap = {
   dip: '1000000000000000000'
 }
 
+/**
+ * returns the number of given unit type
+ * @param unitType
+ */
 export const getUnit = (unitType: string): string => {
   return unitMap[unitType]
 }
 
+/**
+ * format the number of unit to the number of unitType
+ * @param num
+ * @param unitType
+ */
 export const fromUnit = (
   num: string | number | BN,
   unitType?: string
@@ -116,6 +135,11 @@ export const fromUnit = (
   return bn.div(unit).toString(10)
 }
 
+/**
+ * format the number of unitType to the number of unit
+ * @param num
+ * @param unitType
+ */
 export const toUnit = (
   num: string | number | BN,
   unitType?: string
