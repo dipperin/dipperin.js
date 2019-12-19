@@ -69,3 +69,6 @@ build/
 #  cache
 
 .awcache
+
+# docs
+docs

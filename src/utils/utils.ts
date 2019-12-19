@@ -12,16 +12,21 @@ import Bytes from '../helper/bytes'
  * @param {Object} object
  * @return {Boolean}
  */
-export const isBN = BN.isBigNumber
+export const isBN: (value: any) => boolean = BN.isBigNumber
 /**
  * Do nothing
  * @param ___
  */
 export const noop = (...__) => null
 
-export const hexToNumber = value => {
+/**
+ * Converts hex string to number
+ * @param {String} value
+ */
+export const hexToNumber = (value: string): number => {
   if (!value) {
-    return value
+    // return value
+    return 0
   }
   if (value === '0x') {
     return 0
@@ -345,6 +350,12 @@ export const formatNumberToHex = (value: number | string) => {
     : Bytes.fromNat(numberToHex(value))
 }
 
+/**
+ * Converts string of utf-8 to hex
+ * @method formatUtf8ToHex
+ * @param {String} value
+ * @return {String}
+ */
 export const formatUtf8ToHex = (value: string) => {
   return isHexStrict(value) ? Bytes.fromNat(value as string) : utf8ToHex(value)
 }
