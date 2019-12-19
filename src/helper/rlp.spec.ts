@@ -302,15 +302,8 @@ test('decode', () => {
 })
 
 test('encode', () => {
-  const result =
-    '248 58 138 103 101 116 66 97 108 97 110 99 101 174 48 120 48 48 48 48 53 53 56 54 66 56 56 51 69 99 54 100 100 52 102 56 99 50 54 48 54 51 69 49 56 101 98 52 66 100 50 50 56 101 53 57 99 51 69 57'
   const resultString =
-    '0x' +
-    result
-      .split(' ')
-      .map(num => Number(num).toString(16))
-      .join('')
-  console.log(resultString)
+    '0xf83a8b8a67657442616c616e6365adac3030303035353836423838334563366464346638633236303633453138656234426432323865353963334539'
   expect(
     rlp.encode([
       rlp.encode('getBalance'),
@@ -320,7 +313,7 @@ test('encode', () => {
 })
 
 test('encode getBalance', () => {
-  expect(rlp.encode('getBalance')).toBe('0x67657442616c616e6365')
+  expect(rlp.encode('getBalance')).toBe('0x8a67657442616c616e6365')
 })
 
 test('Call decode', () => {
@@ -328,7 +321,10 @@ test('Call decode', () => {
     rlp.decode(
       '0xf83a8a67657442616c616e6365ae30783030303035353836423838334563366464346638633236303633453138656234426432323865353963334539'
     )
-  ).toEqual('0000')
+  ).toEqual([
+    '0x67657442616c616e6365',
+    '0x30783030303035353836423838334563366464346638633236303633453138656234426432323865353963334539'
+  ])
 })
 
 test('encode []', () => {

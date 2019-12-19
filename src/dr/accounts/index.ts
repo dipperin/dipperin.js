@@ -137,10 +137,10 @@ class Accounts {
   static hashMessage(data): string {
     const message = Utils.isHexStrict(data) ? Utils.hexToBytes(data) : data
     const messageBuffer = Buffer.from(message)
-    const preamble = `\x19Dipperin Signed Message:\n${message.length}`
-    const preambleBuffer = Buffer.from(preamble)
-    const ethMessage = Buffer.concat([preambleBuffer, messageBuffer])
-    return Helper.Hash.keccak256(ethMessage)
+    // const preamble = `\x19Dipperin Signed Message:\n${message.length}`
+    // const preambleBuffer = Buffer.from(preamble)
+    // const ethMessage = Buffer.concat([preambleBuffer, messageBuffer])
+    return Helper.Hash.keccak256(messageBuffer)
   }
 
   /**

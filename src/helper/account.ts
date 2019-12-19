@@ -1,7 +1,6 @@
 import Secp256k1 from 'secp256k1'
 import Bytes from './bytes'
 import Hash from './hash'
-import Nat from './nat'
 import cryp from 'crypto'
 
 const { keccak256 } = Hash
@@ -143,7 +142,7 @@ export const makeSigner = (addToV: number) => (
     Buffer.from(privateKey.slice(2), 'hex')
   )
   return encodeSignature([
-    Nat.fromString(Bytes.fromNumber(addToV + sigResult.recovery)),
+    Bytes.fromNumber(addToV + sigResult.recovery),
     Bytes.pad(
       32,
       Bytes.fromNat('0x' + sigResult.signature.slice(0, 32).toString('hex'))
