@@ -11,7 +11,6 @@ const ADD_TO_VALUE = 54
  * sign transaction()
  * @return The signature
  */
-
 export const signTransaction = (
   transactionData: TransactionData,
   privateKey: string,
@@ -25,11 +24,23 @@ export const signTransaction = (
   return Account.decodeSignature(signature(hashRlp, privateKey))
 }
 
+/**
+ * return chain id
+ * @param v
+ */
 export const getChainId = (v: string): string =>
   `0x${Math.round((Nat.toNumber(v) - ADD_TO_VALUE) / 2)}`
 
+/**
+ * returns the hashed and rlped transaction
+ * @param tx
+ */
 export const hashRlpTx = (tx: TransactionInput) => Hash.keccak256(rlpTx(tx))
 
+/**
+ * rlp the transaction
+ * @param transactionInput
+ */
 export const rlpTx = (transactionInput: TransactionInput): string => {
   const { txData, chainId } = transactionInput
   // const {
@@ -69,6 +80,10 @@ export const rlpTx = (transactionInput: TransactionInput): string => {
   ])
 }
 
+/**
+ * rlp the signed transaction
+ * @param transactionResult
+ */
 export const rlpSignedTx = (transactionResult: TransactionResult): string => {
   const { txData, witness } = transactionResult
   const {
@@ -101,6 +116,10 @@ export const rlpSignedTx = (transactionResult: TransactionResult): string => {
   ])
 }
 
+/**
+ * returns the signed transaction from rlp data
+ * @param raw
+ */
 export const getTransactionFromRaw = (raw: string): TransactionResult => {
   const tx = Rlp.decode(raw) as any[]
   const [
@@ -128,6 +147,10 @@ export const getTransactionFromRaw = (raw: string): TransactionResult => {
   }
 }
 
+/**
+ * returns transaction hash
+ * @param transactionData
+ */
 export const getTransactionId = (transactionData: TransactionData): string => {
   const {
     nonce,

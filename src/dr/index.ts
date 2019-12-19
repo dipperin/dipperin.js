@@ -85,6 +85,17 @@ class DR extends Core {
     params: 1
   })
 
+  callConstFunc: (
+    hash: string,
+    blockNum: number,
+    cb?: Callback
+  ) => Promise<string | { error: { message: string } }> = this.buildCall({
+    call: 'dipperin_newContract',
+    inputFormatter: [Helper.Formatters.inputHashFormatter, undefined],
+    name: 'callConstFunc',
+    params: 2
+  })
+
   setMineCoinbase = this.buildCall({
     call: 'dipperin_setMineCoinBase',
     name: 'setMineCoinbase',
@@ -94,6 +105,28 @@ class DR extends Core {
   subscribeBlock = this.subscribe({
     subscriptionName: 'subscribeBlock',
     paramsNum: 0
+  })
+
+  estimateGas: (
+    hash: string,
+    cb?: Callback
+  ) => Promise<string | { error: { message: string } }> = this.buildCall({
+    call: 'dipperin_newEstimateGas',
+    inputFormatter: [Helper.Formatters.inputHashFormatter],
+    name: 'estimateGas',
+    params: 1
+  })
+
+  getAbi: (
+    address: string,
+    cb?: Callback
+  ) => Promise<
+    { abiArr: any[] } | { error: { message: string } }
+  > = this.buildCall({
+    call: 'dipperin_getABI',
+    inputFormatter: [Helper.Formatters.inputAddressFormatter],
+    name: 'getABI',
+    params: 1
   })
 }
 
