@@ -1,6 +1,6 @@
 {
   "name": "@dipperin/dipperin.js",
-  "version": "0.4.46",
+  "version": "0.4.47",
   "private": false,
   "description": "Dipperin javascript lib",
   "main": "build/main/index.js",
@@ -65,7 +65,7 @@
     "isomorphic-ws": "^4.0.1",
     "js-base64": "^2.4.5",
     "keccak": "^1.4.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "oboe": "^2.1.4",
     "qs": "^6.5.2",
     "scryptsy": "^2.0.0",
