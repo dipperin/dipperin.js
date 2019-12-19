@@ -100,6 +100,15 @@ test('lib/account/makeSigner', () => {
   ).toEqual(
     '0xf1bd5e6ffe6d3d1b78f7dc58a5e922229a5eba863e8d2dfa8e2e4df52837d2e4245a507467fb8e02001e61bb888b713c9cff16d3f2b798d62f5228f58eef961e38'
   )
+
+  expect(
+    account.makeSigner(1)(
+      '0x69196b681582f4a42bfb9445e9c10889ed7662695b177483752abb7d4c0f193e',
+      '0x289c2857d4598e37fb9647507e47a309d6133539bf21a8b9cb6df88fd5232031'
+    )
+  ).toEqual(
+    '0xf1bd5e6ffe6d3d1b78f7dc58a5e922229a5eba863e8d2dfa8e2e4df52837d2e4245a507467fb8e02001e61bb888b713c9cff16d3f2b798d62f5228f58eef961e01'
+  )
 })
 
 test('lib/account/recover', () => {
