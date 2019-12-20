@@ -30,6 +30,9 @@ import bytes from '../helper/bytes'
 
 export const typeStringToBytes = (str: string, type: string) => {
   switch (type) {
+    case 'int16':
+    case 'uint16':
+      return bytes.pad(2, bytes.fromNumberString(str))
     case 'int32':
     case 'uint32':
     case 'uint':
