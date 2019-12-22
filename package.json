@@ -1,6 +1,6 @@
 {
   "name": "@dipperin/dipperin.js",
-  "version": "0.4.49",
+  "version": "0.4.50",
   "private": false,
   "description": "Dipperin javascript lib",
   "main": "build/main/index.js",
