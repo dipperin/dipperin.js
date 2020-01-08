@@ -76,30 +76,4 @@ const baseConfig = {
   }
 }
 
-const webConfig = {
-  ...baseConfig,
-  target: 'web',
-  output: {
-    path: path.resolve(__dirname, 'build/web'),
-    filename: 'dipperin.js',
-    libraryTarget: 'umd',
-    library: {
-      root: 'Dipperin',
-      amd: 'Dipperin',
-      commonjs: 'Dipperin'
-    },
-    umdNamedDefine: true
-  }
-}
-
-const nodeConfig = {
-  ...baseConfig,
-  target: 'node',
-  output: {
-    path: path.resolve(__dirname, 'build/main'),
-    filename: '[name].js',
-    libraryTarget: 'commonjs2'
-  }
-}
-
-module.exports = [webConfig, nodeConfig]
+module.exports = baseConfig
