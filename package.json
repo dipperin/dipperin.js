@@ -1,9 +1,9 @@
 {
   "name": "@dipperin/dipperin.js",
-  "version": "0.4.50",
+  "version": "0.5.1",
   "private": false,
   "description": "Dipperin javascript lib",
-  "main": "build/main/index.js",
+  "main": "build/web/dipperin.js",
   "typings": "build/module/index.d.ts",
   "module": "build/module/index.js",
   "license": "MIT",
