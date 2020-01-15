@@ -50,18 +50,22 @@ test('core/method/validateArgs', () => {
 })
 
 test('core/method/toPayload', () => {
-  expect(toPayload(undefined, undefined, 3, 'test', 'test',  [1, 2, 3])).toEqual({
-    callback: undefined,
-    method: 'test',
-    params: [1, 2, 3]
-  })
+  expect(toPayload(undefined, undefined, 3, 'test', 'test', [1, 2, 3])).toEqual(
+    {
+      callback: undefined,
+      method: 'test',
+      params: [1, 2, 3]
+    }
+  )
 
   const transformPayload = payload => {
     payload.params.reverse()
     return payload
   }
 
-  expect(toPayload(transformPayload, undefined, 3, 'test', 'test', [1, 2, 3])).toEqual({
+  expect(
+    toPayload(transformPayload, undefined, 3, 'test', 'test', [1, 2, 3])
+  ).toEqual({
     callback: undefined,
     method: 'test',
     params: [3, 2, 1]
