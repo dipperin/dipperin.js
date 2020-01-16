@@ -1,0 +1,48 @@
+name: Lint
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=branch::$(echo ${GITHUB_REF:11})
+
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run linters
+        run: |
+          git checkout ${{ steps.vars.outputs.branch }}
+          yarn fix
+      
+      - name: Add changes to Git tracking
+        run: |
+          git config --global user.email "it@dipperin.io"
+          git config --global user.name "Github Action"
+          changes=$(git status -s | wc -l)
+          echo $changes
+          if [ changes>0 ] ; then
+            git add -A .
+            git commit -am 'lint'
+          fi
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.vars.outputs.branch }}
